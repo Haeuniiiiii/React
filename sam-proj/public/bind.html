@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<button id="btn">눌러봐</button><br>
+<button onclick="fck2('안농')">이상한버튼</button>
+
+<script>
+
+function prt(msg) {
+    document.write(msg);
+}
+
+// const gd = document.write;
+// 문법에는 전혀 문제가 없지만?
+// gd("<h1>나는야 지디</h1>");
+// Uncaught TypeError: Illegal invocation 에러메세지 확인
+
+const gd = document.write.bind(document);
+// bind를 활용해서 수정을 해준다면?
+gd("<h1>나는야 지디</h1>");
+// 실행이 잘되는 것을 확인!
+
+// bind를 멋지게 쓰는 법!
+// document.write("<h1>재석은 역시 유재석</h1>");
+// prt("<h1>재석은 가장 비싼 돌</h1>")
+// prt("<h2>푸하하하하</h2>");
+
+
+function fck2(pname) {
+    alert(pname);
+}
+
+
+
+// bind란? 
+const btn = document.querySelector("#btn");
+
+// 이벤트 처리 함수(이벤트 핸들러)
+function clk(nm) {
+    alert(`${nm} 너가 눌렀니!?`);
+}
+
+// 이벤트 등록
+btn.addEventListener("click",clk.bind(null, "하니")); // 제대로 실행됨
+// btn.addEventListener("click",clk.call(null, "하니")); // 바로 실행되고 안됨
+// bind는 call과 문법이 완전 똑같다!
+// bind는 내부적으로 함수를 만들어서 해당 함수를 return 해줌
+</script>

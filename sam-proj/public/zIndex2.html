@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #box1 {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        border: 20px groove gold;
+    }
+    .layer {
+        position: absolute;
+        left: 0; top: 0;
+        width: 200px;
+        height: 220px;
+    }
+
+    p {
+        background-color: white;
+    }
+
+</style>
+</head>
+<body>
+    <h1>힘내자 힘힘</h1>
+    <div id="box1" class="layer" >
+        <div id="l1" class="layer"  style="z-index:1000">
+            <img width="200" height="200"  src="https://cdn.pdjournal.com/news/photo/202405/80220_80220_4942.jpg" alt="">
+            <p>1사진p태그</p>
+        </div>
+        <div id="l2" class="layer">
+            <img width="200" height="200"  src="https://t1.daumcdn.net/news/202406/03/segye/20240603204144698crpr.jpg" alt="">
+            <p>2사진p태그</p>
+        </div>
+        <div id="l3" class="layer">
+            <img width="200" height="200"  src="https://t1.daumcdn.net/news/202406/03/donga/20240603030104546kmmg.jpg" alt="">
+            <p>3사진p태그</p>
+        </div>
+        <div id="l4" class="layer">
+            <img width="200" height="200"  src="https://i.namu.wiki/i/zg-J7D3neTddK3SoqVNrFYPkqilchWfusjr09KziIA8qHe6zp5RywvG4pf_8WgawpSKDRTsOg_XuKppN-4PrqQ.webp" alt="">
+            <p>4사진p태그</p>
+        </div>
+
+
+    </div>
+<script>
+    let lindex= 0;
+    const cards = document.querySelectorAll(".layer");
+
+    function fzInit(){
+        for(let i=0; i< cards.length; i++){
+            cards[i].style.zIndex = 1;
+        }
+    }
+
+    function see() {
+        fzInit(); // z-index값 전체 초기화, 뺑뺑 돌게 되겠지
+        lindex++;
+
+        if(lindex >= 4) {
+            lindex = 0;
+        }
+        cards[lindex].style.zIndex = 99999;
+        setTimeout(see, 1000);
+    }
+
+    see();
+</script>    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 아작스 유행으로 콜백지옥(hell of callback) 탄생
+// 기본적으로 인간의 뇌는 비동기 순서를 그리기 어려움
+// 개발자들이 짜증 부림!
+// 당시 bluebird란 회사가 Promise, then/catch/finally 조금 인기가 있어. 이걸 넣어줌
+//                      resolve(콜백)/reject(콜백)/pending
+//
+
+// 처음에만 낯설고, 낯설음, 괜찮음 3번만 보면 천년간 같이 산 느낌!
+const axios = {}; //  네임스테이스용 빈 객체(빈거 아니어도 괜챃음);
+axios.get = function(url){
+    return new Promise(function(res,rej){  // 실제 Promise는 그저 문법적 포장!
+       // 여기엔 비동기 코드가 와야 함
+       let xhr = new XMLHttpRequest();
+       xhr.open("get",url,true);
+       xhr.onreadystatechange = function(){
+          if(xhr.readyState == 4 && xhr.status){
+             //res(JSON.parse(xhr.responseText));
+             let rslt; 
+             // JSON인지 TEXT인지 자동 처리, 실제로 axios 안에 들어 있음
+             try {
+                rslt = JSON.parse(xhr.responseText);
+             } catch (error) {
+                console.log("실패 눈으로 체킁:",error);
+                rslt = xhr.responseText;
+             }
+             res(rslt);
+          }
+       }
+       xhr.send();
+    })
+}
+
+// 실질적으로 성공=> resolve => then 콜백, 실패 => reject => catch 콜백  
+axios.get("r306.json").then(function(suc){
+    console.log("체킁:",suc);
+});
+
+axios.get("data.txt").then(function(suc){
+    console.log("체킁:",suc);
+});
+
+axios.get("data.csv").then(function(suc){
+    console.log("체킁:",suc);
+});
+
+   
+/*
+axios.get("r306.json").then(function(suc){
+    console.log("체킁:",suc);
+}).catch(function(err){
+    console.log("체로롱",err);
+}).finally(function(){    // 클라이언트(브라우져)에서는 거의 사용 되지 않음
+    console.log("끝나면 무조건 실행");
+})
+*/
+
+</script>

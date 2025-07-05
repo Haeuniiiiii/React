@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 배열의 sort 메소드 사용법 (잘 못쓰는 경우가 많음)
+// let testArr1 = [4,8,1,3,5,2];
+// let clone = [...testArr];      // 배열(객체) 복사 (얕은 복사, spread 연산자 사용)
+// let aaa = testArr.sort();      // 원본을 리턴, 그래서 굳이 return을 안해도 됨
+// testArr.sort();                // 원본 자체에 작용하기 때문
+// cloneconsole.log("체킁1 : ", testArr);              // 브라우저 개발 툴에서 이상하게 나올 수 있음
+// console.log("체킁1 : ", clone);              
+// console.log("체킁2 : ", testArr.reverse());    
+
+
+
+// let testArr2 = ["사람1","사람2","사람3","사람4"];
+// testArr2.sort(function(a, b) {  // sort 메소드에 비교 함수를 전달하여 정렬 기준을 정의
+    // console.log("이건 a 당 : ", a, "이건 b 당 : ", b);
+    // return b - a;   // 빼기는 문자열에 먹히지 않앗!              
+// });
+// console.log("체크킁 : ", testArr2);
+
+
+// alert("사람1" > "사람2");  // 문자열 비교는 사전식으로 비교됨
+// let testArr3 = ["사람1","사람2","사람3","사람4"];
+// testArr3.sort(function(a, b) {  // sort 메소드에 비교 함수를 전달하여 정렬 기준을 정의
+//     if(a > b) return 1;  // a가 b보다 크면 1 반환 (a가 뒤로 가야함)
+//     if(a < b) return -1; // a가 b보다 작으면 -1 반환 (a가 앞으로 가야함)
+// });
+// console.log("체크킁 : ", testArr3);
+
+
+// alert("재석" > "형돈"); 
+// 객체 비교는 기준이 없으면 의미 없음
+// 객체 비교는 속성으로 해야됨
+let testArr4 = [
+    {name:"재석", age:20},
+    {name:"명수", age:50},
+    {name:"하하", age:15},
+    {name:"형돈", age:13}
+];    
+// sort 메소드에 비교 함수를 전달하여 정렬 기준을 정의
+testArr4.sort(function(a, b) {  
+    // if(a.name > b.name) return 1;
+    // if(a.name < b.name) return -1; 
+    if(a.age > b.age) return 1;
+    if(a.age < b.age) return -1; 
+});
+console.log("체크킁 : ", testArr4);
+
+</script>

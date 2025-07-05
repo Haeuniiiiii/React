@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+// Promise에 출현으로 콜백지옥이 then 지옥으로 바뀜!
+// Good idea가 필요.. => async. await 등장!    
+
+
+async function getData(){   // 바깥호출이 끝나고 getData()로 처리하러 왔슴다!
+    // alert("내부최상단호출!");
+    let response = await axios.get("data.json"); // Promise를 리턴하는거 앞에 await 사용가능
+    console.log(response.data);
+    // alert("내부하단호출!");
+    
+    // async 함수의 return은 무조건 Promise
+    return { name:"예빈", alias:"메롱" };
+}
+
+getData().then((rslt)=>{
+    console.log("팅팅", rslt);
+});
+// alert("바깥호출!");     
+
+// 위의 코드를 그냥 then을 이용해서 사용 
+// 아주 간단한 처리는 then을 사용하고
+// 가독성을 타겟으로 한 처리가 필요할 떄는 async / await 사용
+axios.get("data.json")
+    .then( (response)=>{ console.log(response.data); })
+
+
+// async / await , 인간뇌는 비동기 처리가 어려운데, 동기식으로 인식할 수 있게 바꾸어줌
+// 바깥 호출이 먼저 실행되니까 비동기가 맞음!
+// 함수를 통째로 처리하는게 아니라 분리해서도 사용할 수 있었다!!!
+// async가 await를 만나기 전까지는 동기가 맞다!
+// 만약 동기였다면 순차적으로 실행되기에 내부호출 다음 바깥호출이 왔겠지!!!
+// async함수끼리 기능(업무)와 얽히지 않도록 ..... 
+// 디버깅도 어렵고 처리도 어렵다! 
+// async함수 1개에 하나의 업무처리가 되도록!....
+
+// 하지만 단점도 있지! async는 사용하려면 무조건 함수를 만들어야 한다....
+
+</script>

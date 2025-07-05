@@ -1,0 +1,134 @@
+리액트 하기 전에 자바스크립트를 정리할 것임
+=> 자바스크립트 ES6 버젼 내용과 비동기 AJAX 못하면 리액트 할 필요없음
+내일 오전 1시간 REVIEW 진행 => 답변 못하면 아주 미움 받음
+
+// 어제 배운 거 키워드
+Node => JS Runtime Environment => OS 위에서 js 사용가능 => B/E
+NVM => Node Version Manager => 멀티버젼, 회사
+NPM => Node Package Manager 
+       npm init -y  => package.json ( 프로젝트 설정 정보)
+       npm i  모듈명(패키지명)  => 설치 => node_modules => dependency
+                                        주지 않는다(용량만 큼)
+                       package-lock.json  =>  호환성 보장을 위해 필요
+       package.json 안에 scripts => npm run 이름  
+                                   관레적으로 start/test는 run 생략가능
+NPX => Node Package eXecute  => 패키지 실행(설치없이)                                   
+
+원시타입(number,string,boolean) vs 객체타입 (원시타입빼고 전부, undefined,null은 무시)
+function도 객체 타입
+원시타입은 복사, 객체타입은 참조(별명)
+
+자동형변환 => 호불호 ("",0만 false,객체는 전부 true) => 머리에 담고 쓰면 정말 편함!
+더하기만 두가지 연산 존재 => 문자열더하기가 우선순위 높음, 나머진 산술연산만 존재
+
+var/let/const => var는 function, let과 const는 {}
+const로 객체 타입 선언했을 때, 객체는 못 바꿔도,내용물은 바꿀수 있음
+
+json => 배열식 접근법!!!!(절대 잘 써야 함.. 연봉과 직결, 브라우져를 컨트롤하는 언어는 js가 유일일 )
+
+함수 => return => 값 반환/종료 => 함수 호출된 자리에는 return된 값이 남는다
+       return 값에는 제약 사항이 없다 => 함수의 매개변수에도 제약사항이 없다
+       애매한 걸 공부!
+
+DRY / KISS
+
+즉각함수  (function(){})(),  !function(){}()       
+
+콜백(callback) => 함수의 매개변수로 넘어가는 함수 (뒤에 불림!)
+                  비동기 결과 처리에 많이 사용됨. 
+                  아주 많이 사용될 때 (Hell of Callback)이라 불림!
+
+this 제어 =>  call, apply, bind(실행이 아니고, 실행할 함수를 return)
+
+표현식 => 선언식 빼고 다 표현식이라 생각해도 상관없음
+       (함수 선언, hoisting(올리기))
+
+
+개발자도 알아야 할 CSS
+position, display, overflow, transform, z-index
+
+
+JS 공부를 어떻게 해야 하는가?
+초급자를 위한 좋은 책이 없고
+
+// 레이아웃(개발자도 필수) 관련
+position => static (브라우져에게 맡김 )
+            relative ( static배치후에 => 추가 제어 )
+            absolute ( 브라우져에 넌 빠져, 내가 제어할 께) 
+                => 브라우져 왼쪽 모서리(0,0)
+             부모 relative  => 자식 absolute( 부모 왼쪼모서리 0,0) 
+// 간단한 애니메이션에 활용             
+trasform =>  rotate, skew   
+
+display(모달(본인꺼 가지고 회사에 가면 좋음),템플릿패턴 엘리먼트.cloneNode(true))
+overflow(hidden,scroll,auto)
+z-index(무조건 큰 숫자가 맨 앞, display or zIndex) 
+position / transform
+
+레이아웃 구성시 -> static을 활용 세로 -> 가로 -> 세로 ->가로 나누기 식으로 구성
+                 특별 구성이 필요한  요소(element)에만, relative/absolute 활용
+
+localStorage -> 쿠키 대용으로 많이 사용됨
+                단순 원시타입 형태로는 거의 안씀
+                객체는 바로 저장 안됨(문자열로 변환하여 저장)
+                ( offline 대응 )
+                네트워크: 오늘 설명한 정도는 꼭 알아두깅!
+                (공인public/  사설private/ 고정/동적, dns localhost, ping  
+                IOT, proxy server )
+
+네트워크 (ip관련) 
+게시판  C(Write)R(Read/list) / localStorage
+       폼.requestSubmit() / 폼.submit()  차이
+게시판은 실제 게시판으로는 못쓴다 -> 일기장 -> 실제 게시판으로 쓰려면 서버쪽에도 저장공간이 필요(동기화)
+페이지 나누기 (그냥 한번 더 해보면 됨! -> 산수)  
+
+이벤트  => 등록법 3가지 ( inline, on이벤트명(덮어씀=>오버라이딩), addEventListener(추가등록) )
+          event.stopPropergation(디폴트는 이벤트버블링 => 이벤트 캡쳐링)
+          event.preventDefault ( 내가 넣지 않은 기본 장착된 이벤트(built-in) 막기 )
+          이벤트 동적 바인딩 (모습과 id가 똑같은 객체(element)가 추가되면 이벤트 등록 필요)
+
+AJAX (비동기 자바스크립트 XML=> JSON, csv )
+     => 동기 => 비동기? (효율-> 성능)
+     => 원본(XMLHttpRequest) => $.ajax => Promise => fetch => axios ===> async/await
+
+function 키워드를 class(생성자함수)로 사용
+=> 생략된 return this 메소드 안 return this 가 머리에서 구분되어야 잘 쓸 수 있음
+
+Array (배열) => forEach(새배열리턴), filter(새배열리턴)
+
+jQuery => 읽기(첫번째요소), 전부쓰기, 부분조작(콜백함수사용)
+          prototype(마을회관)을 이용해서 jQuery plugin 개발도 가능하도록 함
+          즉각실행함수(핵심코드 보호 및 초기화) / 팩토리패턴(new 숨기기)
+          사용에 주의 $("선택자") 할 때 마가 새로운 객체가 생성되니 주의 (같은게 만들어지지 않도록)
+          --> 이렇게 안하면 메모리낭비... 비효율.. 
+
+" jQuery는 시대의 뒤안길로 들어갔지만,,,, jQuery가 남긴 것은 많다! "
+
+sort => 꽤 자주 사용된다! 
+       - 콜백사용
+       - 객체 비교 할 때는 기준이 필요하다
+       - tr 정렬 (appendChild)
+       - 연습할거면 sort()는 놉! sort(function(a,b)) 이거로 연습하기
+
+ES6 => ` 백틱 `
+       - 화살표(this, 매개변수1개일때, return문밖에없을때)
+       - ...Spread Operator (전개연산자)
+       - 함수의 매개변수로 쓰이면 나머지(rest)연산자로 불린다.
+       - 객체 복사에 아주 편하게 사용된다.
+       - 구조분해 => 사용법 = 양쪽이 같은 타입 [] = [] , {} = {}
+       - 값을 뽑아내기 편한 문법 "직관적!"
+
+ESM 모듈(브라우져에서도 사용가능) => export / import {} / export default
+                                   <script type = "module">
+
+fetch(then 두번써야 해서 짜증나지만 built-in) / axios(편하지만 외부 라이브러리 필요)
+async / await 이건 꼭! 잘 써야한다~
+외부 파일 드래그 앤 드롭!
+
+
+
+       
+
+
+
+

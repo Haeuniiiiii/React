@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<input type="text" id="haeun" value="하은">
+
+<script>
+
+// var haeunManse = "하은만세"; // 데이터 타입? string => 원시타입(primitive)
+// alert(haeunManse.substring(2)); 
+// 결과는? 만세, 어떻게 이런일이?
+// 원시타입에 .을 찍는 순간 Wrapper 속성의 객체로 바뀜
+// string => String, number => Number, boolean => Boolean
+// 자바에서 int(원시타입) / Integer(Wrapper객체 타입)
+var haeunNum = 123451234512345; // 데이터 타입? number => 원시타입(primitive)
+alert(haeunNum.toLocaleString()); 
+
+
+var haeun = document.querySelector("#haeun").value;
+haeun = "하은!"; // 결과는? 하은
+
+
+// 오른쪽이 객체 타입인지? 원시타입인지? 중요!
+// 오른쪽 객체가 원시타입이면? 왼쪽에 있는 변수는 별명이 된다!
+// 오른쪽 객체가 객체타입이면? 
+var haeun = document.querySelector("#haeun");
+haeun.value = "하은 만만세!";   // 결과는? 하은 만만세!
+
+
+// 객체 지향 언어를 사용하는 사람은 무조건 알아야함!
+// 이걸 이해 안하고 쓰면, 이상한 상황을 만들어 냄!
+// 원시타입: number, String, boolean (undefined, null 등은 무시)
+// 속성, 메소드 없음 > 홀로 존재
+// 객체타입 : {}. [], built-in 객체, 속성 또는 메소드를 가짐
+
+var hani = "하은";
+alert(typeof(hani));    // 데이터타입 확인하는 메서드!
+var merong = hani;      // 여기서의 동작은? 복사!
+hani = "키키";          // 여기서의 동작은? 
+alert("체크 " + hani);  // 결과는? 체크 키키
+
+
+// 객체는 주소 외에 객체 영역안에 정보를 담아 저장해둔다. (가지고 있으)
+var carInfo = {
+    name:"랭글러",
+    feature:"흰색"
+}
+
+
+var car = carInfo;      
+//참조(Reference), 주소값을 가지고 있는거지 값을 가지고 있는게 아님 => 별명
+car.feature = "달린다";
+alert(car.feature);     // 결과는? 달린다 
+
+</script>

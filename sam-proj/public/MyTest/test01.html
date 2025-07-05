@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn1">일반 함수 클릭</button>
+    <button id="btn2">화살표 함수 클릭</button> 
+</body>
+
+<script>
+    // ✅ btn1에 일반 함수 방식으로 이벤트 핸들러 등록
+    document.getElementById("btn1").addEventListener("click", function () {
+        // 일반 함수는 호출될 때의 '문맥(Context)'에 따라 this가 결정됨
+        // 지금은 addEventListener에 의해 호출되므로
+        // this는 이 이벤트를 발생시킨 요소(btn1 버튼)를 가리킴
+        console.log("버튼1 this →", this);              // 👉 누구? 태그전체
+        console.log("버튼1 this →", this.innerText);    // 👉 누구? 태그안에있는문자만
+        console.log("버튼1 this →", this.innerHTML);    // 👉 누구? 태그안에있는문자만
+    });
+
+    // ✅ btn2에 화살표 함수 방식으로 이벤트 핸들러 등록
+    document.getElementById("btn2").addEventListener("click", () => {
+        // 화살표 함수는 '자기 자신만의 this'를 가지지 않음 ❌
+        // 대신 '선언된 위치'의 this를 **그대로 상속**함
+        // 이 스크립트가 브라우저에서 전역에서 실행됐으므로,
+        // 화살표 함수의 this는 window 객체로 고정됨
+        console.log("버튼2 this →", this);            // 👉 누구? 윈도우 전역객체
+        console.log("버튼2 this →", this.innerText);  // 👉 누구? undefined (window에는 innerText 없음)
+        console.log("버튼2 this →", this.innerHTML);  // 👉 누구? undefined (window에는 innerHTML 없음)
+    // 🔎 핵심 요약:
+    // - 일반 함수: 실행될 때 this가 동적으로 바뀜 → 지금은 btn 요소를 가리킴
+    // - 화살표 함수: 선언될 때 this가 정적으로 결정됨 → window로 고정됨
+// 각각의 버튼을 클릭해서 콘솔 확인
+// 왜 다르게 나오는지 생각해보기 (힌트: 함수의 선언 위치!)
+</script>
+
+</html>

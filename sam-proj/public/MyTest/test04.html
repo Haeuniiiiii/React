@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn4">bind 테스트</button>
+</body>
+<script>
+  const dog = {
+    name: "멍멍이",
+    bark: function () {
+      console.log(`${this.name}가 짖습니다!`);
+    }
+  };
+
+  const btn = document.getElementById("btn4");
+  // 👇 여기를 바꿔보세요
+  btn.addEventListener("click", dog.bark);             // ❌ this = 버튼
+  // btn.addEventListener("click", dog.bark.bind(dog)); // ✅ this = dog
+
+  // bind 없이 실행하면 this가 뭘 가리키는지 콘솔 확인
+
+// bind를 추가하면 어떻게 달라지는지 테스트
+</script>
+</html>

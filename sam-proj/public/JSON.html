@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+// JSON (JavaScript Object Notation) : 자바스크립트 객체 표현법
+
+"use strict" 
+// 엄격모드 적용, 변수 선언 시 var let const 빼먹으면 에러, 그 외에도 조금 더 체크해줌 
+const merong1 = "메롱"; // 
+alert(merong1);
+
+    
+// 예전에 데이터 전송 표준이 XML이었지만 지금은 JSON!
+// JSON이 XML보다 용량이 작고, 알아보기 편함!
+// 자바스크립트로 언어적 처리도 가능!
+// {} [] {[] , []} [{}, {[]}] 다양한 형태가 있으니 업무에 차질 없도록 눈으로 익히기
+
+// 리터럴 표현이라고 칭한다..
+let merong = {}; // {} => new Object()
+let hello = [];  // [] => new Array()
+
+let name="배트맨";
+let isObj = {
+    "name":"인섭",
+    age:24
+}
+
+// 절대 알아야 할 객체 배열식 접근법
+// 속성명을 동적(Dynamic)할당 할 수 있는 엄청난 무기가 될 수 있는 기능이 가능
+let isObj2 = {
+    [name]:"인섭",  
+    ["age"]:24
+}
+console.log("체킁1",isObj);
+console.log("체킁2",isObj2);
+
+/*
+let isObj1 = {};
+isObj1.name="인섭";
+isObj1.age=24
+console.log("체킁1",isObj == isObj1);
+console.log("체킁2",isObj1);
+*/
+
+</script>

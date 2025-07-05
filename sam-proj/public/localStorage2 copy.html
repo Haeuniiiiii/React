@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<input type="text" id="myname" value="" placeholder="암거나작성"/><br/>
+<button onclick="modify()">수정버튼</button>
+
+<script>
+
+    let testArr = ["일번", "이번", "삼번", "사번"];
+
+    // alert(testArr); //일번,이번,삼번,사번
+    // alert(testArr.toString()); //일번,이번,삼번,사번
+
+    localStorage.setItem("check", JSON.stringify(testArr));
+    // ["일번","이번","삼번","사번"]
+    //배열+toString() >> 배열의 요소값을 , 붙여서 출력
+
+    let info = {
+        name: "홍길동",
+        special: "바보",
+        age: 100
+    }
+
+</script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+
+const arr1 = ["재석", "형돈"];
+const arr2 = ["홍철", "명수"];
+
+// 전개 연산자 사용하여 위 2개의 배열을 합친 새로운 배열이 만들어진다!
+const arr3 = [...arr1, ...arr2];
+// console.log(arr3);
+
+
+// 기존 arr 배열에 man 배열 추가하려면?
+const saram = [
+    {name:"준하", age:50},
+    {name:"세찬", age:20}
+];
+const man = {name:"하하", age:15};
+
+// 방법1
+const newArr = [...saram, man];
+console.log(newArr);
+
+// 방법2
+// 기본 배열과 새로운 배열을 함께 가진 또 새로운 배열을 만들려면
+// arr.push(man);    // 기존 배열에 추가
+// 이런 식으로 작성하면 메모리가 낭비됨!
+// 하지만, 얻는 것도 있음. 히스토리 추적(상태변화)이 가능!
+
+</script>

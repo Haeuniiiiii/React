@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn5">누가 나일까?</button>
+</body>
+<script>
+  const obj = {
+    name: "나야나",
+    say1: function () {
+      console.log("일반 함수:", this.name);
+    },
+    say2: () => {
+      console.log("화살표 함수:", this.name);
+    }
+  };
+
+  document.getElementById("btn5").addEventListener("click", function () {
+    obj.say1(); // ?
+    obj.say2(); // ?
+  });
+
+  //어떤 출력은 "나야나"이고, 어떤 출력은 undefined일까?
+
+// 화살표 함수가 왜 믿을 수 없는지 눈으로 확인해보세요
+</script>
+</html>

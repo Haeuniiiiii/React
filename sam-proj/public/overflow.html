@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #acja {
+            position: relative;
+            margin: 50px auto;
+            width: 200px;
+            height: 200px;
+            border: 5px solid gold;
+            overflow: hidden;
+            /* hidden, scroll, auto */
+        }
+
+        .photo {
+            width: 200px;
+            height: 200px;
+        }
+
+        #al1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 1px solid pink;
+            width: 820px;
+            height: 200px;
+        }
+
+        #al2 {
+            position: absolute;
+            left: 820;
+            top: 0;
+            border: 1px solid pink;
+            width: 820px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- overflow 자주 사용됨, 특히 이미지 슬라이더 등에 기본적으로! -->
+    <div id="acja">
+        <div id="al1">
+            <img src="https://img.khan.co.kr/news/2024/05/31/news-p.v1.20240530.c7d288875799481dbfe99f7b3d9e5735_P1.jpg"
+                class="photo" />
+            <img src="https://images.khan.co.kr/article/2024/05/16/news-p.v1.20240516.a1f1d2704cf74e029d74538040e65063_P1.png"
+                class="photo" />
+            <img src="https://img.hankyung.com/photo/202405/01.36892590.1.jpg" class="photo" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMJWF_EjaJG2dphIRzFnxHEmifEpEJGhdPug&s"
+                class="photo" />
+        </div>
+        <div id="al2">
+            <img src="https://cdn.pdjournal.com/news/photo/202405/80220_80220_4942.jpg" class="photo" />
+            <img src="https://t1.daumcdn.net/news/202406/03/segye/20240603204144698crpr.jpg" class="photo" />
+            <img src="https://t1.daumcdn.net/news/202406/03/donga/20240603030104546kmmg.jpg" class="photo" />
+            <img src="https://i.namu.wiki/i/zg-J7D3neTddK3SoqVNrFYPkqilchWfusjr09KziIA8qHe6zp5RywvG4pf_8WgawpSKDRTsOg_XuKppN-4PrqQ.webp"
+                class="photo" />
+        </div>
+    </div>
+    <script>
+        // 테스트 al1 4개가 지나가고 나면 al2가 붙고 al2지나고나면 al1뒤에 붙게
+
+        const al1 = document.querySelector("#al1");
+        const al2 = document.querySelector("#al2");
+
+        function slide() {
+            if (!al1.style.left) {
+                al1.style.left = "0px"
+                al2.style.left = "820px"
+            };
+
+            al1.style.left = parseInt(al1.style.left) - 10 + "px";
+            al2.style.left = parseInt(al2.style.left) - 10 + "px";
+            
+            if(parseInt(al1.style.left) <= -820) al1.style.left = "820px";
+            if(parseInt(al2.style.left) <= -820) al2.style.left = "820px";
+
+            setTimeout(slide, 50);
+        }
+        slide(); //호출
+    </script>
+
+</body>
+
+</html>

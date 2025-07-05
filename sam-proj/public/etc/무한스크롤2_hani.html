@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무한스크롤2</title>
+<style>
+    #disp {
+        width: 600px;
+        height: 300px;
+        border: 1px solid greenyellow;
+        overflow: auto;     /* 부모 벗어나는 자식 처리 */
+    }
+</style>
+</head>
+<body>
+    <h1>무한스크롤 실제 데스크톱에서 마니 사용한당</h1>
+    <!-- 데스크톱에서는 무한스크롤을 전체가 아니라 영역지정해서 사용하는 경우가 더 많다 텍스트박스같은.-->
+    <div id="disp">
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+        <h1>h1태그짱많당</h1>
+<script>
+    const disp = document.getElementById("disp");
+
+    disp.scrollTo(0,0); // 명시적 표현, 개발자의 의도를 담은! setTimeout 필요없음
+    disp.onscroll = function() {
+        let scrollTop = disp.scrollTop;
+        let scrollHeight = disp.scrollHeight;
+        let clientHeight = disp.clientHeight;
+
+        const tunnVal = 50;
+        if ( (scrollTop + clientHeight) >= scrollHeight - tunnVal ) {
+            for(let i=1; i<=7; i++) {
+            
+                
+                let h1Tag = document.createElement("h1");
+                h1Tag.innerHTML = "h1태그가 스크롤로 내려가고 이땅";
+                disp.appendChild(h1Tag);
+            }
+        }
+    }
+</script>
+</body>
+</html>

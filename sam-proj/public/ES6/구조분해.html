@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 전개 연산자와 마찬가지로 구조 분해도 대단한 게 아니고 축약표현이라고 생각하면 좋음
+// 구조 분해는  = 양쪽 데이타 타입이 같아야 함!
+const testArr = ["준수","우현","유진","철호"];
+const [aaa,,,bbb] = testArr;
+//console.log("체킁",aaa,bbb);
+//aaa = "인섭짱";
+
+const testObj = {name:"주영",age:19,special:"애니메이션"};
+const { age,name }  = testObj;
+//const age = testObj.age;
+//const name = testObj.name;
+console.log("뽑기",name,age);
+//age = 21; 
+
+// 함수의 매개변수에 구조분해 적용
+function fCK({nickName,name="소희"}){    // {nickName} = {name:"주영",nickName:"천재"}
+    console.log("체킁킁:",nickName,name);
+}
+//fCK({nickName:"천재"});
+
+// 함수의 return 값에 구조 분해 적용
+function fCK2(){
+    return ["소희","천재"];
+}
+
+let [sname,merong]  = fCK2();
+//console.log("체로롱",sname,merong);
+
+function fCK3(){
+    function add(a,b){
+        return a+b;
+    }
+    function minus(a,b){
+        return a - b;
+    }
+    return [minus,add];
+}
+
+const [,jyADD] = fCK3(); // 배열인 경우 순서 인식으로 문제가 발생하는 경우가 많음
+//alert(jyADD(3,3)); //??
+
+function fCK4(){
+    function add(a,b){
+        return a+b;
+    }
+    function minus(a,b){
+        return a - b;
+    }
+
+    return { add, minus};
+} 
+
+const minus = ()=> "마이너스";
+
+const {minus:mminus} = fCK4(); // 필요한 상황에서만 뽑아낸 이름 변경, 이유없이 쓰면 가독성 저해!
+//alert(mminus(9,3)); // 6
+
+// 제공되는 라이브러리를 멋진말로 3rd party 프로그램
+// 문서를 찾아야 함! => 습관이 들어야한다! => 영어도 읽어야한다...
+
+</script>

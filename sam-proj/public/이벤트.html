@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <button  onclick="fck1()">눌렁1</button>
+    <button id="btn2">눌렁2</button>
+    <button id="btn3">체킁3</button>
+    <button  onclick="fagain()">체킁킁</button>
+    <button  id="btn4">체킁4</button>
+</body>
+<script>
+const btn4 = document.querySelector("#btn4");
+btn4.addEventListener("click",function(){
+    alert("흥치뿡!");
+})
+
+function fagain(){
+    document.body.removeChild(btn4);  // 버튼4 없애깅
+    let myBtn=document.createElement("button");
+    myBtn.innerHTML="체킁4";
+    myBtn.id="btn4";
+    document.body.appendChild(myBtn);
+    console.log(document.querySelector("#btn4")); 
+    
+
+    // 이벤트 동적 바인딩!
+    // id나 class가 같다고, 이전 등록한 이벤트가 먹지 않음
+    // 새로운 객체(element)는 새로 이벤트 등록
+    // 어제 산 소나타, 오늘 산 소나타 다릅니다!
+    document.querySelector("#btn4").addEventListener("click",function(){
+        alert("보통은 이렇게 하지용");
+    })
+    /*
+    myBtn.addEventListener("click",function(){
+        alert("난 새로운 버튼이얌");
+    })
+    */
+}
+
+
+
+
+
+
+const btn2 = document.querySelector("#btn2");
+const btn3 = document.querySelector("#btn3");
+
+// 등록법 2번
+btn2.onclick = function(){
+    //alert("눌렁?");  꼭 주의해서 사용해야 함! 
+    btn3.addEventListener("click",function(){
+        alert("저는 btn3예요");
+    })
+    //alert("눌렀닝?");
+}
+
+/*
+btn2.onclick = function(){   // 앞에 껄 덮어버림!
+  //  alert("눌렀닝2?");
+}
+*/
+
+// 등록법 3번, 가장 최신! 
+btn2.addEventListener("click",function(){
+   // alert("진호 만만세")
+})
+
+
+function fck1(){}
+</script>

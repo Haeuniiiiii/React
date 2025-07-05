@@ -1,0 +1,24 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    const tArr1 = ["예빈","철호"];
+    const tArr2 = ["강빈","주영"];
+
+    // 위 2개의 배열을 합친 새로운 배열을 만들려면?
+    const tArr3 = [...tArr2,...tArr1];
+    //console.log("체킁킁:",tArr3);
+    const  tArr = [
+        {name:"상윤",age:50},
+        {name:"소희",age:15}
+    ];
+    
+    const yb = {name:"예빈",age:20};
+    // 기존 tArr과 yb를 함께 가진 새로운 배열을 만들려면
+   // tArr.push(yb);  // 기존 배열에 추가
+   // 이런식으로 하면 메모리가 낭비 됨!, 하지만 얻는게 있음, 히스토리 추적(상태 변화!)
+    const newArr = [yb,...tArr];  // new Array()와 같아서 빈 배열 곧 새로운 배열을 만드는 것임
+    console.log("체킁1",newArr);
+    console.log("체킁2",tArr);
+
+</script>

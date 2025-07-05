@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #disp {
+        width:600px;
+        height:300px;
+        border: 3px groove gold;
+        overflow: scroll;  /* 부모 벗어나는 자식 처리 */
+    }
+</style>
+</head>
+<body>
+<h1>실제 데스크톱에서 많이 사용 형식</h1>
+<div id="disp">
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+    <h1>지후 만만세</h1>
+</div>
+<script>
+    const disp = document.querySelector("#disp");
+    disp.scrollTo(0,0);  // 명시적 표현 setTimeout 필요없음
+
+    disp.onscroll = function(){
+        let scrollTop = disp.scrollTop;
+        let clientHeight = disp.clientHeight;
+        let scrollHeight = disp.scrollHeight;
+
+        const tunnVal = 50;
+        if((scrollTop + clientHeight) >= (scrollHeight -tunnVal)){
+            // 역시 여기에 AJAX 코드가 오면 됨!
+            for(let i=1; i<=7; i++){
+                let h1Tag = document.createElement("h1");
+                h1Tag.innerHTML = "우현 만만세 " +i;
+                disp.appendChild(h1Tag);
+            }
+        }
+    }
+</script>    
+</body>
+</html>

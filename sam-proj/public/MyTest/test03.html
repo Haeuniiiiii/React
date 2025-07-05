@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+  function showName() {
+    console.log("내 이름은:", this.name);
+  }
+
+  const user1 = { name: "아이유" };
+  const user2 = { name: "유재석" };
+
+  // 👇 이거 수정해보기
+  showName();               // undefined
+  showName.call(user1);     // ?
+  showName.call(user2);     // ?
+// call()로 this를 바꿔서 원하는 이름 출력되게 해보세요
+
+// this.name이 어디서 오는지 감 잡기!
+</script>
+
+</html>

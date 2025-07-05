@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+// 즉각 실행함수
+// 라이브러리 만들 때 기본적으로 1~2개 정도 들어감
+// 라이브러리 시작시 초기화 코드 또는 핵심코드를 블록화 할 때도 즉각 실행한수를 사용
+(function(){
+    alert("난 바로 실행됨!");
+})()
+
+(function(pName){
+    alert(pName + "난 바로 실행됨!");
+})("이름!")
+
+// 공식 함수 선언과 
+// function names(){}
+
+// 표현식 함수 선언(expression) 1+2 5+6
+// 연산을 해서 결과가 하나로 귀결되게 하는 것
+kgb(); // 호출 OK, hoisting(호이스팅):올리기 선언에만 적용됨!
+
+merong("false"); // NG
+const merong = function(pname) {
+    alert("난 표현식 함수얌" + pname);
+}
+
+function kgb() {
+    alert("난 kgb얌")
+}
+// 표현식으로 함수 선언 시에는 항상 const로 해야한다.
+// 그래야 다른 곳에서 내가 사용한 함수명을 사용했을 때 에러확인이 가능하다
+// 서로 겹치지 않도록 const로 표현식을 작성하도록 하자!
+
+// 자바스크립트는 함수 무더기 언어이다. 
+// 객체지향언어이면서 함수지향언어
+
+// 함수는 왜 만드는가?
+// DRY 원칙( Do not Repeat Yourself "되묻지마라" )
+// KISS ( Keep It Simple, Stupid "불필요한 복잡성을 피하고 가능한 한 단순하게 유지하라" )
+
+// 공식 함수 선언법
+// return 데이터 타입에는 제약사항이 전혀 없음
+// 매개변수에도 데이터 타입에는 제약사항이 전혀 없음
+function hani() {
+
+    return "머찐하으니";
+    //리턴을 만나면 함수가 종료된다는 사실을 잊지 마세요.
+
+    return function() {
+        return "true or false";
+    } // 생략되어있음. 당연한 이야기
+}
+
+// 함수 호출
+// alert(hani()); // 함수가 호출된 자리에는 함수의 return값이 남는다.
+// 결과는 머찐하으니
+
+
+// 매개변수로 함수가 올 때 해당 함수를 callback 함수라 부른다.
+// 단순히 뒤에 불린다는 의미
+// 가끔 callback은 비동기다 라고 하는 황당한 이야기가 있는데, 절대 관련없다.
+// 비동기 최종 결과 처리를 callback에 넘기는 방식의 코드를 보다 생긴 오해!
+
+function fck2(fcb) {
+    fcb(); //함수호출에만 ()를 붙일 수 있음.. 호출! (그래서 이건 땡)
+}
+
+function cb(){
+    alert("내가 콜백이얌!");
+}
+
+fck2(cb);
+
+
+
+</script>

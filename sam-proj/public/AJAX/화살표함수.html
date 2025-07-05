@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// JS에선 원래 function이 많이 쓰임, function 키워드 때문에 손목 나감!(과장표현)
+// callback 함수가 많이 사용되는데, function 키워드는 길고, 가독성을 해침 function 안에 function
+const fck = function(){
+     return "메롱1";
+}    
+
+// function 키워드 빼고, => 넣으면 끝
+const fck2 = (pName)=>{ return `${pName} 메롱` };
+
+
+// 위 코드는 위 처럼 선언하지 않고 아래 처럼 씀
+// 매개변수 1개뿐일 때 () 생략 가능
+// { } 안에 return문만 있을 때 { } 와 return이 생략 가능
+
+// 화살표 함수 쓸 때 주의 사항 => { } 안에 this를 써야 하면 그냥 function  키워드 사용
+// 왜? 화살표 함수는 this 제어가 안됨!, 무조건 소속 상위 객체를 나타내도록 되어있음(맥락에 따라 달라짐)
+const fck3 = pName => `${pName} 메롱`;
+console.dir(fck);
+console.dir(fck2);
+//alert(fck3("형준"));
+
+</script>

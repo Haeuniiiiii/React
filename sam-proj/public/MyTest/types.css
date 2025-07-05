@@ -1,0 +1,9 @@
+/* CSS 관련 키워드, MDN(https://developer.mozilla.org/ko)에서 검색 */
+body {
+    font-family: Arial, Helvetica, sans-serif; 
+}
+img {
+    max-height: 300px; 
+    display: block;
+    margin: 0 auto; 
+}

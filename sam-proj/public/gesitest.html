@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>**당신의 스킬 최대 3개까지만 선택하세요**</h1>
+    <!-- 
+        4개째 체크하면 안된다고 메세지 띄우고
+        3개에서 다른걸 체크하려면 하나를 해제하고 해야하도록 합시다.
+    -->
+    <input type="checkbox" name="skill" value="html" onclick="ck(this)"> HTML
+    <input type="checkbox" name="skill" value="css" onclick="ck(this)"> CSS
+    <input type="checkbox" name="skill" value="js" onclick="ck(this)"> JS
+    <input type="checkbox" name="skill" value="java" onclick="ck(this)"> JAVA
+    <input type="checkbox" name="skill" value="spring" onclick="ck(this)"> SPRING
+    <input type="checkbox" name="skill" value="oracle" onclick="ck(this)"> ORACLE
+
+    <script>
+
+
+        // 실행을 안해도 결과가 있어서 알러트창 안뜬다.
+        // let saram = "사람이다";
+        // saram || alert("사람이맞다"); //or연산 둘중1개만 true면 true
+
+        // 실행을 해야하기 때문에 알러트창이 뜬다.
+        // let saram = "";
+        // saram || alert("사람이맞다"); //or연산 둘중1개만 true면 true
+
+        // 앤드연산자 true면 true 알러트창이 뜬다.  
+        let saram = "사랑이당";
+        saram && alert("사람이맞다"); 
+        
+
+        let testNum = 4;
+        // let aaa = testNum++; // 그저 두줄을 한줄로 줄인 축약기법이다.
+        let aaa = testNum;
+        testNum = testNum + 1;
+        alert("aaa" + aaa); // aaa 4; 
+
+        // aaa = ++testNum;
+        testNum = testNum + 1;
+        aaa = testNum;
+        alert("aaa " + aaa); // aaa 6;
+
+
+        let cnt = 0; // 현재 체크된 카운트수
+
+        function ck(pthis) {
+            // console.log("체크", pthis);
+            // alert(pthis.checked); // true면 체크 안된걸 체크하는 행동, false면 체크된걸 해제하는 행동
+            if (pthis.checked) {
+                cnt++;
+            } else {
+                cnt--;
+            }
+
+            if (cnt == 4) {
+                alert("3개까지만 선택 가능합니다!");
+                pthis.checked = false; // 체크한거 강제해제
+                cnt--;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

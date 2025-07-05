@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script src="./jsp.js"></script>
+<script>
+    // 글의 아이디가 필요하다 그래야 찾아서 수정한다
+    const bdTable = "bdTable"; // 편하게 로컬변수로 스토리지 키값
+    const gid = request.getParameter("gid");
+
+    let gulArr = JSON.parse( localStorage.getItem(bdTable) );
+
+    for (let i = 0; i < gulArr.length; i++) {
+        let gul = gulArr[i];
+        if(gul.id == gid) { // 해당글 찾았다! 찾았다면 넘어온 값으로 수정(덮어쓰기)
+            gulArr.splice(i,1); // index i부터 1개만 지워라
+            break;  // 이런거 빼먹으면 데이터가 많을 경우 성능 손해가 엄청나다!!!
+        }
+    }
+    // 메모리만 수정된상태 그래서 저장하는 과정 필요
+    localStorage.setItem(bdTable, JSON.stringify(gulArr));
+    location.href = "list.html"; //  리스트로 이동 
+
+</script>

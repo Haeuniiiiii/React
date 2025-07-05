@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+    // Spread Operator ... , 함수의 매개변수로 사용될 때는 rest(나머지) 연산자라 불림
+
+    // function fck(p1, p2, ...merong) {   // 예를 들면 p1,p2는 필수, 나머지는 선택(안 올수도 있음)
+    //     console.log("쳌", merong);  // undefined
+    //     console.log("쳌쳌", p2);    // [] 빈배열
+    // }
+    // fck("1","2","3","4");
+    // fck("하나만 줘따!");
+
+
+
+    // function fck(p1, p2="하나만줘따2", ...merong) {   
+    //     console.log("쳌", merong);  
+    //     console.log("쳌쳌", p2);   
+    // }
+    // fck("하나만 줘따!");
+    // fck("하나만 줘따!", "두개도줘따");
+    
+
+
+    function fck(p1, p2="하나만줘따2", ...merong) {   
+        console.log("쳌", merong);  // undefined
+        console.log("쳌쳌", p2);    // [] 빈배열
+    }
+
+    // 전개 연산자로의 사용!
+    let testArr = ["하하", "재석", "명수"]
+    console.log("전개쳌", ...testArr);
+
+    let c2 = [...testArr]; // 배열 복사가 이루어짐
+    console.log("복사쳌", testArr == c2); 
+    /* 
+    위 한줄과 동일한 표현이다!
+    내 연봉과도 직결되는 한 줄 이니 잘 알고가자!
+    let c2 = [];
+    for (let i=0; i<testArr.length; i++) {
+        c2.push(testArr[i]);
+    }
+    */
+
+    let testObj = { name:"홍철", job:"유니콘"};
+    let c3 = { ...testObj, job:"사장님", special:"행복하기" } // 객체 복사가 이루어짐
+    c3.name = "노홍철";
+    console.log("노홍철", testObj);
+    console.log("노홍철", c3);
+    // 여기서 결론, 전개연산자를 사용하면 객체/배열 상관없이 복사가 이루어짐 반복문 안써두댕
+    // 객체는 복사하면서 내부에 있는 속성값도 변경 가능함.
+    // 배열은 인덱스 번호가 있어서 속성값 수정은 생각보다 까다롭다! 그래서 복사를 주로 활용
+
+    
+    
+</script>

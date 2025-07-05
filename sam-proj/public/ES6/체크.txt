@@ -1,0 +1,27 @@
+
+# 리액트 들어가기 전.... 
+1. 2015년 말에 발표된 자바 스크립트 버전을 ES6 이상이라고 부름
+- ES2022 : 새로 나온 버전
+- ESNEXT : 나오기 전인데 붙은 이름
+
+2. 템플릿 스트링 (` 백틱 `) => 사용권장
+- 멀티라인 ${} 이 Spring EL표현식과 정확히 일치ㅏㅎㅁ,,,, 그래서! 사용주의가 필요함!
+    : \ 를 붙여서 (Escape Sequence 처리)
+
+3. 화살표 함수 
+- this 사용시 function 키워드 써야한다는 것만 주의!
+
+4. 전개연산자(...)
+- 함수 매개변수로 쓸 떄는 rest 연산자라 부름
+- **중요** Spread Operator ==> 매우 중요!!!! 
+
+5. **중요** 구조분해 (Destructuring)
+
+6. ESModule ESM ( export / import )
+- 표준이기 때문에 브라우저 지원함 (commonjs도 유명함)
+
+7. fetch (Promise 타입 리턴)
+
+8. async / await
+
+

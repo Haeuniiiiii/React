@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table border="1" width="400">
+        <thead>
+            <tr>
+                <th>순번</th>
+                <th onclick="nmSort()">이름</th>
+                <th onclick="ageSort()">나이</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="merong">
+                <td>1</td>
+                <td>재석</td>
+                <td>20</td>
+            </tr>
+            <tr class="merong">
+                <td>2</td>
+                <td>형돈</td>
+                <td>25</td>
+            </tr>
+            <tr class="merong">
+                <td>3</td>
+                <td>명수</td>
+                <td>40</td>
+            </tr>
+            <tr class="merong">
+                <td>4</td>
+                <td>하하</td>
+                <td>33</td>
+            </tr>
+        </tbody>        
+    </table>
+    
+<script>
+    // const trs = document.querySelectorAll(".merong"); // merong 클래스를 가진 모든 tr 태그를 선택
+    const tbody = document.querySelector("tbody"); 
+    let nameToggle = true; // 이름 정렬 토글 변수 디폴트값
+    let ageToggle = true; // 나이 정렬 토글 변수 디폴트값
+    
+    // 이름정렬함수 (토글가능)
+    function nmSort(){
+        // console.log("체크1 : ", trs);
+        // let nameA = a.children[1].innerHtml; // 첫 번째 td의 텍스트
+        // let nameB = b.children[1].innerHtml; // 두 번째 td의 텍스트
+        // if(nameA > nameB) return 1; // a가 b보다 크면 1 반환 (a가 뒤로 가야함)
+        // if(nameA < nameB) return -1; 
+        // return nameA.localeCompare(nameB); // 문자열 비교
+        
+        let trs = Array.from(document.querySelectorAll(".merong"));
+        trs.sort((a,b)=>{
+            if(a.children[1].innerHTML > b.children[1].innerHTML ){
+                return nameToggle?1:-1;
+            }else {
+                return nameToggle?-1:1;;
+            }
+        });
+
+        // 정렬 된걸 화면에 뿌리기
+        for(let i=0; i< trs.length; i++){
+            tbody.appendChild(trs[i]);  // 정렬된 순서대로 tbody 뿌리기
+        }
+        nameToggle = !nameToggle;
+    }    
+
+    // 나이 정렬 함수 (토글가능)
+    function ageSort(){
+
+        let trs = Array.from(document.querySelectorAll(".merong"));
+
+        trs.sort((a,b)=>{
+            if(Number(a.children[2].innerHTML) > Number(b.children[2].innerHTML)){
+                return ageToggle?1:-1;
+            }else {
+                return ageToggle?-1:1;
+            }
+        });
+
+        // 정렬 된걸 화면에 뿌리기
+        for(let i=0; i< trs.length; i++){
+            tbody.appendChild(trs[i]);  // 정렬된 순서대로 tbody 뿌리기
+        }               
+        ageToggle = !ageToggle; // 값 뒤집어 놓기
+
+    }
+
+</script>
+</body>
+</html>

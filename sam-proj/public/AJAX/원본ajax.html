@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div id="disp"></div>
+<button onclick="faaa()">아작스호출</button>
+<script>
+    function faaa(){
+        fajax({
+            method:"get",
+            url:"data.csv",
+            cb:function(rslt){
+                disp.innerHTML = rslt;
+            }
+        })
+        /*
+        fajax("get","data.txt",function(rslt){
+            disp.innerHTML = rslt;
+        })
+        */
+    } 
+
+
+    const disp = document.querySelector("#disp");
+
+    // 매개변수 덩어리 처리 => 확장성이 좋아짐
+    function fajax(pSet) {   
+        const xhr = new XMLHttpRequest(); 
+        xhr.open(pSet.method, pSet.url, true);  
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("가져온 결과물:", xhr.responseText);
+                pSet.cb(xhr.responseText);
+                //disp.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();                       //  시킨대로 하세요
+    }
+
+
+    /* 매개변수 처리가 맘에 안듬, 나열 보다는 1개 덩어리로
+    function fajax(method,url,fcb) {
+        const xhr = new XMLHttpRequest(); 
+        xhr.open(method,url, true);  
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("가져온 결과물:", xhr.responseText);
+                fcb(xhr.responseText);
+                //disp.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();                       //  시킨대로 하세요
+    }
+    */
+    /* 계속 ajax를 써야 한다면, DRY 원칙에 맟춘 일반화 과정이 필요 
+    function fajax() {
+        // AJAX => ASynchornouse JAvascript XML(비동기 자바스크립트 XML) 
+        // 전역변수로 쓰면 나쁜 사람(현실 기준)!
+        const xhr = new XMLHttpRequest(); // 퀵서비스 아저씨 호출!
+        xhr.open("get", "data.csv", true);  // 시킬 일 지정 (어디 다녀 올건지)
+        // 퀵서비스 아저씨 모니터링(감시)
+        xhr.onreadystatechange = function () {
+            // 진짜로 퀵서비스 아저씨 일이 끝난 상태 -> 우리 관심은 이것만
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log("가져온 결과물:", xhr.responseText);
+                disp.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.send();                       //  시킨대로 하세요
+    }
+    */
+
+
+
+
+</script>

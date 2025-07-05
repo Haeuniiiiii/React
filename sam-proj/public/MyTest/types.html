@@ -1,0 +1,56 @@
+<!-- HTML 관련 키워드, MDN(https://developer.mozilla.org/ko)에서 검색 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 외부 파일 연결 -->
+    <link rel="stylesheet" href="types.css">
+    <script src="types.js"></script>
+</head>
+<body>
+    <!-- 제목 -->
+    <h1>타입, 값의 종류!</h1>
+    <p>데이터는 특징에 따라 분류됨. 그 기준을 타입이라 함.</p>
+    <img src="../MyTest/img/선재.png" alt="다양한-타입의-음료들">
+    <!-- 숫자(number) 타입 -->
+    <h2>numbers, 숫자 타입</h2>
+    <ul>
+        <li>integer, 딱 떨어지는 수 👉 -1, 0, 1, 2</li>
+        <li>float, 소수점 이하를 포함하는 수 👉 3.14, -9.81;</li>
+    </ul>
+    <!-- 문자열(string) 타입 -->
+    <h2>string, 여러개의 문자들</h2>
+    <ul>
+        <li>const name = "홍팍";</li>
+        <li>const starSign = '천칭자리'</li>
+    </ul>
+    <!-- typeof, 타입 확인 -->
+    <h2>typeof, 타입 확인하는 법!</h2>
+    <ul>
+        <li>typeof 1234;</li>
+        <li>typeof "1234";</li>
+        <li>typeof starSign;</li>
+    </ul>
+    <!-- boolean, 타입 확인 -->
+    <h2>boolean, 참과 거짓!</h2>
+    <ul>
+        <li>typeof true;</li>
+        <li>typeof false;</li>
+        <li>const hungry = true;</li>
+        <li>typeof hungry;</li>
+    </ul>
+    <!-- 미지정 vs 없음 -->
+    <h2>미지정(undefined) vs 값이 없음(null)</h2>
+    <ul>
+        <li>let dinner; // undefined, 이름표만 만들고 값을 미지정!</li>
+        <li>typeof dinner</li>
+        <li>dinner = "🍕 피자"; // string 값을 변수에 연결</li>
+        <li>typeof dinner</li>
+        <li>dinner = null; // null, 값을 연결하지 않기로 함!</li>
+        <li>typeof dinner</li>
+    </ul>
+</body>
+</html>

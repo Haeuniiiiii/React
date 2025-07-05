@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>볼품없는 게시판</h1>
+    <!-- <form action="" onsubmit="return false"> 전송하지 않겠어요!의 의미 (true면 보내겠죠!)-->
+    <form action="write_action.html" onsubmit="return submit()">
+        제목 <input type="text" name="btitle" value="제목" required/><br/>
+        작가 <input type="text" name="bwriter" value="작가" required/><br/>
+        작가 스킬 (최소 1개는 선택하세요)<br/>
+        자바스크립트 <input type="checkbox" name="bskill" value="js" checked/>
+        자바 <input type="checkbox" name="bskill" value="java" checked/>
+        스프링 <input type="checkbox" name="bskill" value="spring" checked/>
+        오라클 <input type="checkbox" name="bskill" value="oracle" checked/><br/>
+        <br/>
+        <textarea name="bcont" cols="80" rows="10" required>텍스트영역</textarea><br/>
+        <button>등록</button>
+    </form>
+<script>
+    function submit() {
+        let ckbox = document.querySelectorAll("[type=checkbox]:checked");
+        if(!ckbox.length) {
+            alert("최소 1개는 선택하세요!");
+            return false; // 전송거부
+        }
+        return true; // 전송승인
+    }
+
+</script>
+</body>
+</html>

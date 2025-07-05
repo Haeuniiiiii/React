@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<h1>요즘 많이 쓰는 무한 스크롤</h1>
+<script>
+
+    // 크롬에선 요따구로 해야 동작함 (아직도 크롬에선 안된다고 생각하는 사람들도 있음)
+    setTimeout(()=>{
+        window.scrollTo(0,0);
+    },50)
+
+    // 스크롤 이벤트
+    window.onscroll = function(){
+       // console.log("체킁");
+       let scrollTop  = document.documentElement.scrollTop; 
+       let clientHeight  = document.documentElement.clientHeight; 
+       let scrollHeight  = document.documentElement.scrollHeight;
+       console.log("scrollTop",scrollTop);
+       console.log("clientHeight",clientHeight);
+       console.log("scrollHeight",scrollHeight);
+       console.log("==================================");
+        // 스크롤바를 끝까지 내렸다면
+        const tunnVal= 50;  // 살짝 위에서 처리하기 위한 튜닝값(알아서 조절)
+        if( (scrollTop + clientHeight) >= (scrollHeight -50)){
+            // 실제 경우 여기에 ajax 코드가 와서, 서버에서 추가 데이터를 받아서 넣어 줌
+            for(let i=1; i<=10; i++){
+                let h1Tag = document.createElement("h1");
+                h1Tag.innerHTML = "소희 준수 만만세 " + i;
+                document.body.appendChild(h1Tag);
+            }
+        }
+
+
+    }
+</script>
+</body>
+</html>

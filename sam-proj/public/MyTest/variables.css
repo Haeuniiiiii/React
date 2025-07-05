@@ -1,0 +1,14 @@
+/* CSS 관련 키워드, MDN(https://developer.mozilla.org/ko)에서 검색 */
+body {
+    font-family: Arial, Helvetica, sans-serif; 
+}
+img {
+    max-height: 180px; 
+    display: block;
+    margin: 0 auto; 
+}
+.box { 
+    border: 4px solid black; 
+    min-height: 5rem;
+    margin-bottom: 0.25rem;
+}

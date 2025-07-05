@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+var myName = "소희짱!";
+</script>
+<!-- 브라우져에서 모듈 사용 기본적으로 esm만 사용가능-->
+<script type="module">
+// as 를 붙임으로 변수명을 재설정할 수도 있다.
+import merong,{add as plus , minus} from "./cal.js"
+// alert(merong());
+//alert(add(3,3));
+merong();
+alert(plus(3,3));
+
+</script>
+
+<script type="module">
+    //모듈은 분리되어서 서로 모름(관계없음)
+  alert(myName); //??
+</script>
+

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<button onclick="frem()">지우기</button>
+<script>
+    function frem() {
+        delete localStorage.merong;
+    }
+    localStorage.merong = "메롱";
+// 브라우저 저장공간 localStorage, sessionStorage(자동삭제)
+// localStorage.setItem("이름", "오늘은 기분이 좋아");
+// localStorage.setItem("나이", "그러니까 공부도 열심히");
+// localStorage.setItem("나이", "삶도 열심히"); // 덮어쓴다 (수정한다)
+// localStorage.key(0); // 거의 사용되지 않음!
+// alert(localStorage.getItem("이름"));
+// alert(localStorage.length);
+// localStorage.removeItem("나이"); // 덮어쓴다 (수정한다)
+// localStorage.clear(); // 전부지우기
+
+</script>

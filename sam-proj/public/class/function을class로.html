@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+// 고급 내용(비전공자들에게 어려울 수 있음 => 시간을 두고 보면 결국 이해 됨)
+// 실제 전문 라이브러리 회사가 아니거나, 공통모듈 라이브러리 팀에 소속되지 않으면
+// 당장 급하진 않은 내용 => 대신 미리 알아두고, 조금씩 연습해 두면 좋은 대우를 받을 수 있음
+
+// 생성자(constructor) 함수라고도 부름
+function Idol(name,age){   // 이 순간 function 키워드는 class 의 의미로 사용되었음
+    this.name = name;   // this = {}
+    this.age = age;
+    /* 메소드는 공유가 가능한데 이렇게 선언하면 각자 따라 가짐
+    this.who = function(){  // 메소드 추가
+        alert(this.name);
+    }
+    */
+    return this;  // 일반 함수는 그냥 return만 생략되어 있는 것과 다름!
+}   
+// 같은 class들의 공유영역 prototype
+// 메소드는 상태를 관리하진 않기 때문에 공유하면 메모리 절약 효과가 있음!
+Idol.prototype.who = function(){
+    alert(this.name);
+}
+
+
+let jy = new Idol("주영",20);
+let gb = new Idol("강빈",30);
+jy.who();  // 메소드 호출!
+gb.who();
+console.log("체킁: ",jy);
+console.log("체킁: ",gb);
+</script>

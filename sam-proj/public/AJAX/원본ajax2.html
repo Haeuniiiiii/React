@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <button onclick="fc1()">아작스 호출1</button>
+    <button onclick="fc2()">아작스 호출2</button>
+</body>
+<script>
+function fc2(){
+    $.ajax({
+        method:"get",
+        url:"data.csv",
+        async:true,
+        success:function(rslt){
+            console.log("체킁:",rslt);
+        }
+    });
+}   
+
+function fc1(){
+    $.ajax({
+        method:"get",
+        url:"r306.json",
+        dataType:"text",  // 서버와 상관없는 속성!
+ //       async:false,
+        success:function(rslt){
+            console.log("체킁:",rslt);
+            //alert("진영 만만세");  // 만약 이게 먼저 뜨면 동기
+        }
+    });
+   // alert("진호 만만세");  // 만약 이게 먼저 뜨면 비동기
+}
+
+// 유지 보수를 위해서 알아는 두어야 함 (새차 보다 중고차가 훨씬 많음)
+const $ = {};  // 빈객체 생성, 여기선 그냥 네임스페이스용
+//  DRY 원칙에 따라 반복 코드를 없애기 위해서 일반화(추상화)    
+$.ajax = function(pSet){   // pSet => {속성:값,속성:값}
+    let xhr = new XMLHttpRequest();  // 전역으로 쓰면 좋지 않다. 필요한 일마다 별도  퀵서비스
+    //alert(pSet.async);
+    if(!("async" in pSet)){  // async 디폴트 값 설정, 요즘 잘 쓰는 표현, 객체에 해당 속성 있는지 여부 in
+        pSet.async = true;
+    }
+    xhr.open(pSet.method,pSet.url,pSet.async);
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            //console.log(xhr.responseText);
+            if(pSet.dataType == "json"){
+                pSet.success(JSON.parse(xhr.responseText));
+            }else {
+                pSet.success(xhr.responseText)
+            }
+        }
+    }
+    xhr.send();  
+}  
+</script>

@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+button {
+    @apply border-2 border-b-blue-800 text-blue-800 border-collapse hover:bg-blue-400
+}

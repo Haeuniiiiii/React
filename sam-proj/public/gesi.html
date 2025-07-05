@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage 응용편</title>
+</head>
+<body>
+    <script>
+        // alert("알러트창입니당");
+    </script>
+    <!-- 
+        form 태그는 여러번 올 수 있당 
+        단, form안에 form이 오면 안됨!
+        (현업에서 자주 발생!, html태그가 많으면 찾기 힘듦)
+        action의 기본값은 현재 주소표시창(location)의 URL
+    -->
+    <h1>볼품없는 게시판</h1>
+    <form>
+        <input type="text" id="aaa" name="aaa" value="메롱" /><br/>
+        <input type="text" id="bbb" name="bbb" value="안메롱" />
+        취미가 머에영<br/>
+        <input type="checkbox" name="hobby" value="멍">멍때리기<br/>
+        <input type="checkbox" name="hobby" value="잠">꿀잠자기<br/>
+        <input type="checkbox" name="hobby" value="Json">JS하기<br/>
+        <!-- http://192.168.36.115:5500/public/gesi.html?aaa=888&bbb=888&hobby=js -->
+        <input type="submit" value="전송" />
+    </form>
+    
+    <form>
+        <input type="text" id="ccc" name="ccc" value="홍" /><br/>
+        <input type="text" id="ddd" name="ddd" value="길동1" /><br/>
+        <input type="text" id="ddd" name="ddd" value="길동2" />
+        <input type="submit" value="전송" />
+    </form>
+<script>
+    let bin = {}; // 빈 객체
+
+    for(let i=0; i < document.forms[1].elements.length; i++) {
+        let ele = document.forms[1].elements[i];
+        console.log("체크", ele);
+
+        bin[ele.name] = ele.value; //Good표현
+    }
+
+    console.log("체크킁", bin); // 데이터 묶음을 만들어줄 수 있음
+       
+    // form관련 제공되는 것
+    // alert(document.forms[1].ddd.value);
+    // for in 문
+    // for (let element in document.forms[1].elements) {
+    //     console.log("체크", element);
+    // }
+</script>
+</body>
+</html>

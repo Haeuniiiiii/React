@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn3">setTimeout 테스트</button>
+</body>
+<script>
+  document.getElementById("btn3").addEventListener("click", function () {
+    console.log("바깥 this:", this); // 👉 버튼
+
+    setTimeout(function () {
+      console.log("일반 setTimeout:", this); // 👉 누구?
+    }, 500);
+
+    setTimeout(() => {
+      console.log("화살표 setTimeout:", this); // 👉 누구?
+    }, 1000);
+  });
+//어떤 this는 버튼, 어떤 this는 window?
+// 둘의 차이를 정확히 눈으로 확인해보기
+</script>
+</html>

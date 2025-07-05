@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+// this => 이것, 나! 지시대명사, 누가 말하느냐에 따라 그 대상이 다름
+// call , apply, bind 란 함수객체의 메소드를 이용하여 this를 개발자 맘대로 할당 할 수 있음
+
+var hani="하니"; // let과 const는 나중에 추가 되어서 안됨!(별도 scope객체)
+// 전역변수를 선언하는 것은 실제로는 window객체에 속성을 추가하는 것과 같음.
+alert(window.hani);
+
+// 전역 함수를 선언하는 것은 window객체에 메서드를 추가하는 것과 같음.
+// window.fck = function(){}
+// 메서드 안에서 this는 자기가 속한 객체를 나타내게 됨
+
+function fck(p1,p2) {
+    console.log("this ", this); //window
+    console.log("매개변수 ",p1 ,p2);
+}
+// fck();
+
+const gd = {name:"지디"};
+gd.merong = fck;
+
+// 내가 원하는대로 값을 지정해둘 수 있다.
+gd.merong.call(document,"흥","치"); // 첫번째 매개변수는 무조건 this가 가리켜야할 값
+gd.merong.apply({name:"우현히"},["흥","치"]);;
+
+
+</script>

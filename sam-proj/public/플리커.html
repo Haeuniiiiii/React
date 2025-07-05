@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<script>
+ // 호출되는 함수를 미리 만들어 두기 (없으면 에러 나니깡)  
+ // 데이터를 주는 방식이 재미남 JSON형식의 매개변수로 데이터를 줌!(JSONP)
+ // 진짜 중요한 건 CORS 제약사항을 받지 않는다는 것! 
+ function jsonFlickrFeed(pData){
+    console.log("체킁:",pData);
+    let mitems = pData.items;
+    for(let i=0; i< mitems.length; i++){
+        let item = mitems[i];
+        let imgURL = item.media.m;
+
+        let imgTag = document.createElement("img"); // <img> 태그 맹글기
+        imgTag.src = imgURL;
+        imgTag.width=100;
+        imgTag.height=100;
+        imglist.appendChild(imgTag);  // 이걸 해야 화면에 보임!
+    }
+ }
+</script>
+</head>
+<body>
+   <input type="text" id="sohee" value="" placeholder="찾고싶은이미지?">
+   <button onclick="fsch()">껌색</button>
+   <script>
+    /* 여기에 스크립트를 쓰는 건 좋지 않지만, 가끔 개발때는 요따구로 편하게도 함 */
+    const sohee = document.querySelector("#sohee");
+    const preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+    const postURL = "&format=json";
+    function fsch(){
+        //alert("불렸낭?");
+        imglist.innerHTML=""; // div 태그 내용 clear
+        let schURL = `${preURL}${sohee.value}${postURL}`;
+        let scrTag =  document.createElement("script"); // 스크립트 태그 맹글깅
+        scrTag.src = schURL;
+        document.head.appendChild(scrTag); // 문서에 넣어야 실행됨 
+    }
+   </script>
+   <div id="imglist"></div>
+<script>
+    const imglist = document.querySelector("#imglist");
+</script>
+<!-- script태그, link태그 Cross-Origin 제약사항이 없음! -->
+<script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=cat&format=json"></script>    
+</body>
+</html>

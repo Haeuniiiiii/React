@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<input type="text" id="myname" value="" placeholder="암거나작성"/><br/>
+<button onclick="modify()">수정버튼</button>
+
+<script>
+
+    const name = document.querySelector("#myname");
+
+    function modify() {
+        //localStorage의 name 속성값이 바뀌도록 해봅니다! (중요)
+        let mynameInfo = JSON.parse(localStorage.getItem("세팅")); 
+        // 메모리로 읽어들임
+
+        mynameInfo.name = myname.value; 
+        // 메모리 상의 값 변환, localStorage내용이 바뀌지 않음
+        
+        console.log("체크", mynameInfo);
+
+        localStorage.setItem("세팅", JSON.stringify(mynameInfo)); 
+        // 메모리상의 값을 localStorage에 저장
+    }
+
+    // localStorage는 객체 저장을 지원하지 않음 (문자열만 저장 가능)
+    let info = {
+        name: "홍길동",
+        special: "바보",
+        age: 100
+    }
+
+
+
+    // 브라우저 개발자 툴이 우리의 눈을 속임 마치 객체(Json)인 것처럼..
+    // 도와주기 위해 있을 뿐, 가독성.. 문자열이니 속지 말자!
+    // localStorage.setItem("세팅", JSON.stringify(info)); // 꼭 문자열로 저장해야함
+    // let check = localStorage.getItem("세팅"); // 읽기
+    // console.log( typeof check ); // 데이터타입 체크
+    // console.log("체크", check); //출력해보기
+
+</script>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .active {
+            color: red;
+            font-size: 5em; /* 5배 */
+        }
+
+    </style>
+</head>
+<body>
+    <h1>볼품없는 게시판 리스트</h1>
+    <div id="glist"></div>
+    <br><br>
+    <a href="write.html">작성하기</a>
+<script src="./jsp.js"></script>
+<script>
+    // gul을 가지고 오자
+    // 스토리지 키값
+    const bdTable = "bdTable"; 
+    let gulArray = JSON.parse(localStorage.getItem(bdTable)); 
+
+    
+    // 페이지 나누기
+    // 언어나 환경에 따라 조금씩 다른긴 하지만 결국 그냥 간단한 산수임을 인지하는 것이 중요!
+    const cntPerpage = 10; // 페이지당 갯수
+    let curPage = 1;       // 지금은 몇 페이지?
+
+    let pgnum = request.getParameter("pgnum");
+    if(pgnum) { // 만약 넘어 왔다면 처리(number 체크는 일단 무시)
+        curPage = pgnum;
+    }
+
+    let totalGul = gulArray.length;       
+    let totalPage = Math.ceil(totalGul / cntPerpage); // ??
+    let startNum = (curPage - 1) * cntPerpage;
+    let endNum = startNum + cntPerpage; // = , < 따라 조금씩 달라질 수 있음
+    // 마지막 페이지 문제 해결 (108개 8개는 어디로?)
+    // 힌트 : 현재 마지막 페이지는 글의 개수가 8개, 그 앞까지는 딱 맞게 10개
+    if(endNum > totalGul) endNum = totalGul; // 실제 글 갯수보다 크면 안됨!
+
+    /*
+        1       2       3       
+        0-9     10-19   20-29
+    */
+
+    // gulArray = gulArray.reverse() //배열 뒤집기
+    let glist = document.querySelector("#glist");
+    
+    // gul 마우스 오버 아웃 처리 // 보통 기본적으로 제공해야하는 기능
+    function fover(pTr) {
+        pTr.style.backgroundColor="black";
+        pTr.style.color="white";
+    }
+
+    function fout(pTr) {
+        pTr.style.backgroundColor="white";
+        pTr.style.color="black";
+    }
+
+    let tblStr = `
+                <table border=1 width=600>
+                <tbody>
+                <tr><th>순번</th><th>제목</th><th>작가</th><th>능력</th></tr>
+                `;
+
+    for(let i=startNum; i < endNum; i++) {
+        console.log("체크", i);
+        
+        let gul = gulArray[i];
+        
+        tblStr+= `
+                <tr onmouseover="fover(this)" onmouseout="fout(this)">
+                    <td>${i+1}</td>
+                    <td><a href="read.html?gid=${gul.id}">${gul.title}</a></td>
+                    <td>${gul.writer}</td>
+                    <td>${gul.skills}</td>
+                </tr>
+                `;
+    }
+
+    tblStr += `</tbody></table><br><br>`;
+
+    // 전체 페이지 출력
+    for(let pg = 1; pg <= totalPage; pg++) {
+        if(pg == curPage) {
+            tblStr += `<a href="list.html?pgnum=${pg}" class="active">${pg}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;
+        } else {
+            tblStr += `<a href="list.html?pgnum=${pg}">${pg}</a>&nbsp;&nbsp;&nbsp;&nbsp;`;
+        }
+    }
+    
+    glist.innerHTML = tblStr;
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>무한스크롤</title>
+</head>
+<body>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+    <h1>무한스크롤 많이 쓴당!</h1>
+
+<script>
+
+    // 크롬에서는 요롷게 작성해야 동작함 (아직도 크롬에서는 안된다고 생각하는 사람도 있다.)
+    setTimeout(() => {
+        window.scrollTo(0,0);
+    }, 50)
+    
+    
+    // 스크롤 이벤트 (필요할 때 가져다가 사용하자!)
+    window.onscroll = function() {
+        let scrollTop = document.documentElement.scrollTop;
+        let clientHeight = document.documentElement.clientHeight;
+        let scrollHeight = document.documentElement.scrollHeight;
+        console.log("scrollTop", scrollTop);
+        console.log("clientHeight", clientHeight);
+        console.log("scrollHeight", scrollHeight);
+        console.log("==================================");
+
+        // 스크롤바를 끝까지 내렸다면?
+        const tunnVal = 50;     
+        // 살짝 위에서 처리하기 위한 튜닝값(알아서 조절)
+        // top이 소수점이 나왔다면 >= 부등호 주의!
+        if( (scrollTop + clientHeight) >= (scrollHeight - 50) ) {
+            for (let i=1; i<=10; i++) {
+                let h1Tag = document.createElement("h1");
+                h1Tag.innerHTML = "h1태그10개추강쳌" + i;
+                document.body.appendChild(h1Tag);
+            }
+        }
+
+
+    }
+</script>
+</body>
+</html>

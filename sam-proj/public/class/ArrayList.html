@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+
+// 사용예시
+// const testObj = []
+// testObj["0"] = "배열식 접근법 사용가능이다 인덱스배열법"
+
+
+function ArrayList(){
+   this.length = 0;     // 여기서 만들어져 내보내지는 객체에 length 속성 추가
+   return this;  // 생략 해도 됨 그저 명시적 표현 , this를 아는자! 객체를 아는거다!
+}  
+
+
+// 메소드 추가 마을회관에 놓고온다! (prototype)
+ArrayList.prototype.add = function(pValue){ // 공유
+// ArrayList.add = function(pValue){              // 비공유
+   this[this.length] = pValue;                 // 배열식 접근법
+   this.length++;       // 다음 값을 위한 index 증가!
+   return this;  // 여기서 this는 이 메소드를 가진 객체, 이걸로 메소드 체이닝 완성!
+}
+
+
+ArrayList.prototype.get = function(pIndex){ // 공유
+    return this[pIndex];  
+    // 배열식 접근법, 일반적으로 읽기 기능은 메소드 체이닝 구성이 어려움!
+}
+
+
+// ArrayList.prototype.remove = function(pIndex){ // 공유
+//    delete this[pIndex]; // 배열식 접근법
+//    this.length--; // 길이 감소는 하지 않음!
+// }
+
+
+ArrayList.prototype.remove = function(pIndex){ // 공유
+   for (let i = pIndex; i < this.length-1; i++) {
+         this[i] = this[i + 1];
+   }
+   delete this[this.length - 1];
+   this.length--;
+}
+
+let mylist = new ArrayList();// 
+//  mylist.add("1번사람");
+//  mylist.add("2번사람");
+
+// 메소드 체이닝
+// mylist.add("1번사람").add("2번사람"); // 에러 발생! this가 ArrayList가 아니라 mylist가 된다! return this;가 없으면 에러 발생!
+mylist.add("1번사람").add("2번사람").add("3번사람").remove(1);
+// alert(mylist.get(1));
+
+console.log("체킁:", mylist);
+
+</script>

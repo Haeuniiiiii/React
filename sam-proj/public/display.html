@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<style>
+    #he {
+        display: block; 
+        /* 
+        block : 한 줄 모두 차지 (내 옆에 오지마!)
+        , inline-block : div태그가 옆으로 와도 됨 (같이 있자!)
+        , none : 아예 보이지 않음
+        */
+    }
+
+    #myModal {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0; 
+        top: 0;
+        background-color: rgba(255, 0, 0 , 0, 0.5);
+        display: none;
+    }
+
+    #modalContent{
+        margin: 20px auto;
+        width: 50%;
+        height: 50%;
+        background-color: blueviolet;
+        color: white;
+    }
+
+
+</style>
+<body>
+    <!-- display 미친듯이 많이 사용됨 : 화면을 효율적으로 사용하기 위해서-->
+<div id="myModal" onclick="modalClose()">
+    <div id="modalContent">
+        <h1>모달컨텐츠임당</h1>
+        <button onclick="modalClose()">X</button>
+    </div>
+</div>
+    <div id="wrapper">
+        <button onclick="modalOpen()">모달오픈</button>
+        <button onclick="fwOpen()">새창오픈</button>
+    </div>
+    
+<script>
+
+    const myModal = document.querySelector("#myModal");
+
+    function modalOpen() {
+        myModal.style.display = "block"; // none에서 block으로
+    }
+    
+    function modalClose() {
+        myModal.style.display = "none"; // block에서 none으로
+    }
+
+
+    function fwOpen() {
+        // window.open("http://www.naver.com", "이름", "속성");
+        // 속성은 브라우저마다 지원되는게 조금 다름.
+        // 이름 작성 안하면 무한반복됨.
+        window.open("http://www.naver.com", "하은", "width=300,height=300,left=-100,top=-100");
+        // 이름을 부여하면 새탭이 열리지 않고 열린 페이지 새로고침
+        // 이름은 말그대로 페이지 이름, 페이지속성을 정하면 사이즈조절이나 위치선정가능
+
+    }
+</script>
+
+</body>

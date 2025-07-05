@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+
+const hani = {
+    name: "하은",
+    age: 20,
+    grade: "sepcial",
+    param:"뜬당!"
+}
+
+
+function fck(param) {
+    alert(param + "은 " + hani[param]); // 이렇게 동적으로 쓸 수 있음
+    // alert(param + "은 " + hani.param); // 이 경우는 param이란 이름의 속성이 있어야함
+
+    alert(param + "은 " + hani["age"]); // 이렇게 동적으로 쓸 수 있음
+    alert(param + "은 " + hani["grade"]); // 이렇게 동적으로 쓸 수 있음
+}
+
+fck("name");
+fck("age");
+fck("grade");
+
+
+
+</script>

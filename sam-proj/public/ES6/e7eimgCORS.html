@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>E7E 메롱</title>
+    <style>
+    * {
+        margin:0px;padding:0px;
+        box-sizing: border-box;
+    }
+ 
+    #wrapper {
+        position: relative;
+        margin:0 auto;
+        top: 10vh;
+        width: 440px;
+        text-align: center;
+    }
+    #acja {
+        position: relative;
+        margin:5px auto;
+        width: 440px;
+        height: 440px;
+        border: 20px groove gold;
+        background-color: orange;
+        overflow: hidden;
+    }
+    #leftBox{
+        position:absolute;
+        margin:0;
+        left:0; top:0;
+        width: 1620px;
+        height:400px;
+    }
+    #rightBox{
+        position:absolute;
+        margin:0;
+        left:1600px; top:0;
+        width: 1620px;
+        height:300px;
+    }
+ 
+    img {
+        width: 400px;
+        height: 400px;
+    }
+ 
+    input[type=button] {
+        position: absolute;  
+        width: 50%;
+        height: 40px;
+        left: 0px;
+        font-weight: bolder;
+    }
+ 
+    input[name=btn2]{
+        left:50%;
+    }
+    h1{
+        background-color: orange;
+    }
+    #modal {
+        position: fixed;
+        width:50vw;height: 8vh;
+        left:25vw; top:25vh;
+        border:3px solid yellowgreen;
+        background-color:blueviolet;
+        z-index: 100;
+        color:white;
+        text-align: center;
+        padding-top: 10px;
+        font-size: 1.5em;
+        display: none;
+    }
+    #bar {
+        margin-left: 10px;
+        height:2vh;
+        background-color: orange;
+    }
+    #icnt {
+        color:red;
+        font-weight: bolder;
+    }
+    </style>
+</head>
+<body>
+<div id="modal">
+    <div id="cont">
+        <span>껌색 & 로딩 주웅.. 쪼메망</span>
+        <div id="bar" style="width:5%"></div>
+    </div>    
+</div>
+<div id="wrapper">
+    <h1>&copy; E7E 슬라이딩 전자앨범</h1>
+    <span id="icnt"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="text" id="schWord" value="" placeholder="검색할 이미지 적어주삼" autofocus>
+    <button id="schBtn">껌색</button><br>
+    <div id="acja">
+        <div id="leftBox">
+            <img class="mimg" src="">
+            <img class="mimg" src="">
+            <img class="mimg" src="">
+            <img class="mimg" src="">
+        </div>
+        <div id="rightBox">
+            <img class="mimg" src="">
+            <img class="mimg" src="">
+            <img class="mimg" src="">
+            <img class="mimg" src="">    
+        </div>
+    </div>
+    <input type=button name=btn1 value="슬라이딩!" onclick="fStart(this)" disabled>
+    <input type=button name=btn2 value="오버플로(토글)" onclick="fOverflow()" disabled>
+</div>
+<script>
+const firstImg="https://img1.daumcdn.net/thumb/R750x0/?scode=mtistory2&fname="+
+  "https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FtP7jD%2FbtslULIgpW3%2FAAAAAAAAAAAAAAAAAAAAAJE2TLH-H__COR6u0LlPo_mS1yILhAfCaeYq4SV-XTZy%2Fimg.jpg%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1751295599%26allow_ip%3D%26allow_referer%3D%26signature%3DpsIXlCcq2xDaaA5Qm7mPGWSOoLE%253D";
+//필요한 전역변수 선언
+const mov = 5;          // 움직임 튜닝값
+const loopTime = 100;   // 반복타이머 튜닝값
+const maxWidth = 1610;  // 튜닝값
+let mImgCnt = 8;        // 이미지 index로 사용
+const currImgCnt =8;    //이미지갯수
+let isStart=false;      // 시작 안한 상태
+let timer=null;         // 타이머
+let time2=null;         // modal(로딩용)
+let imgUrlArr; 
+ 
+const myIcnt = document.querySelector("#icnt");
+const myModal = document.querySelector("#modal");
+const myBar = document.querySelector("#bar");
+const myLeftBox = document.querySelector("#leftBox");
+const myRightBox = document.querySelector("#rightBox");
+const myBtn1 = document.querySelector("[name=btn1]");
+const myBtn2 = document.querySelector("[name=btn2]");
+const myMimg = document.querySelectorAll(".mimg");
+myMimg[0].src = firstImg;
+ 
+const mySchWord = document.querySelector("#schWord");
+const mySchBtn = document.querySelector("#schBtn");
+//구글 이미지 검색 URL
+const preSchURL = "https://www.google.com/search?q=";
+const postSchURL = "&tbm=isch";   // 이미지 서치
+ 
+//검색버튼 이벤트, 엔터키 이벤트
+mySchBtn.onclick = fSch;
+mySchWord.onkeydown = function(){
+    if(event.keyCode == 13){
+        fSch();
+    }
+}
+ 
+// 초기화
+function fInit(){
+    myBtn1.disabled=true;
+    myBtn2.disabled=true;
+    myLeftBox.style.left = "0px";
+    myRightBox.style.left =`${maxWidth}px`;
+}
+ 
+// 로딩 중 모달
+function fLoading(){
+    if(parseInt(myBar.style.width) > 95) myBar.style.width="5%"; 
+    myBar.style.width = parseInt(myBar.style.width)+5+"%";
+    timer2=setTimeout(fLoading,500);
+}
+ 
+ 
+//이미지 URL검색함숭
+function fSch(){
+    if(timer){
+        //clearTimeout(timer);
+        myBtn1.click();
+    }
+    fInit(); // 초기화
+ 
+    imgUrlArr = [];   // img url 담을 배열
+    let schURL = `${preSchURL}${mySchWord.value}${postSchURL}`;
+ 
+    let xhr = new XMLHttpRequest();
+    xhr.open("get",schURL,true);
+ 
+    xhr.onreadystatechange = ()=>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            let cont = xhr.responseText;
+ 
+            // sIndex는 찾기시작 index값으로 대략 튜닝값(찾을 문자열이 실제 더 뒤에 나옴,내맘!)
+            let sIndex = 50000;         
+            let fIndex =1;
+ 
+            myModal.style.display = "block";
+            fLoading();
+            while( (startIndex = cont.indexOf("[\"https://",sIndex)) != -1){
+                sIndex = startIndex+2;
+                let eIndex = cont.indexOf("\"",sIndex);
+                let imgURL = cont.substring(sIndex,eIndex);
+                // 막혔거나(403), 못찾는(404) url은 제외하고 오직 jpg만
+                if(imgURL.includes(".jpg") && !imgURL.includes("chosun") 
+                   && !imgURL.includes("post-phinf") && !imgURL.includes("thumbnews")
+                   && !imgURL.includes("blogthumb") && !imgURL.includes("vingle")
+                   && !imgURL.includes("newsen")    && !imgURL.includes("an2-img")
+                   && !imgURL.includes("pstatic")
+                   && !imgURL.includes("mblogthumb") && !imgURL.includes("daumcdn")){
+                    console.log(imgURL);
+                    imgUrlArr.push(imgURL);
+ 
+                }
+            }
+            myIcnt.innerHTML = imgUrlArr.length + "개 발견";
+            // 억지로 로딩체킁, 첫번째 이미지만
+            //console.log("결과:",imgUrlArr);
+            let ckImg = new Image();
+            ckImg.onload = function(){
+                myBar.style.width = "100%";
+                clearTimeout(timer2);
+                myMimg[0].src = ckImg.src;
+                mImgCnt += currImgCnt/2;
+                myBtn1.disabled=false;
+                myBtn2.disabled=false;
+                myModal.style.display="none";
+                myBar.style.width="5%";
+            }
+            ckImg.src= imgUrlArr[0];
+ 
+            // 억지롱 로딩체킁 끝
+ 
+            for(let i=1; i< currImgCnt; i++){
+                myMimg[i].src= imgUrlArr[i];
+            }
+        }
+    }
+    xhr.send();
+}
+ 
+//슬라이딩 버튼 눌러도 속도 안빨라지겡, Proxy(대리) 적용
+function fStart(pThis){
+    if(!isStart){
+        fSlide();
+        isStart = true;
+        pThis.value = "멈춤";
+        return;
+    }
+    clearTimeout(timer);
+    timer=null;
+    pThis.value = "슬라이딩!";
+    isStart = false;
+}
+ 
+//슬라이딩 함숭
+function fSlide(){
+    // inline 스타일이 정의되어 있지 않을 땡 초기황
+    if(!myLeftBox.style.left) myLeftBox.style.left = "0px";
+    if(!myRightBox.style.left) myRightBox.style.left =`${maxWidth}px`;
+ 
+    // 이미지4개 그룹단위 이동
+    myLeftBox.style.left = parseInt(myLeftBox.style.left) - mov + "px";
+    myRightBox.style.left = parseInt(myRightBox.style.left) - mov + "px";
+    
+    // 액자 왼쪽 벗어나면 다시 오른쪽으로...(내맘)
+    if(parseInt(myLeftBox.style.left) <= -maxWidth)  {
+        chgNewImg(myLeftBox,0);
+    }
+    if(parseInt(myRightBox.style.left) <= -maxWidth) {
+        chgNewImg(myRightBox,currImgCnt/2);
+    }
+    // 재귀호출로 반뽁!
+    timer = setTimeout(fSlide,loopTime);
+}
+ 
+//벗어나면 새로운 이미지로 바꾸깅!
+function chgNewImg(pBox,pStart){
+        pBox.style.left = `${maxWidth}px`;
+        for(let i=pStart; i< (pStart+currImgCnt/2); i++){
+            mImgCnt++;
+            if(mImgCnt >= imgUrlArr.length) mImgCnt=0; 
+            myMimg[i].src = imgUrlArr[mImgCnt];
+        }
+}
+ 
+//OverFlow 토글링 함숭
+const acjaRule = document.styleSheets[0].cssRules[2];
+function fOverflow(){
+    if(acjaRule.style.overflow == "hidden"){
+        acjaRule.style.overflow = "visible";
+    } else {
+        acjaRule.style.overflow = "hidden";
+    }
+}
+</script>
+</body>
+</html>

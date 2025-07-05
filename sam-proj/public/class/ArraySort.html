@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+ // 배열의 sort 메소드 사용법 (잘 못쓰는 경우가 많음)
+ //let testArr = [4,8,1,3,5,2];
+ //let clone = [...testArr];  // 객체 복사, 눈 어지러울때 테크닉이 필요(복사)
+ //let aaa=testArr.sort();  // 원본을 리턴, 그래서 굳이 return 받아서 사용하지 않아도 됨
+ /* 잘하는 사람들은 이걸 잘 쓰지 않음
+ testArr.sort();  // 원본 자체에 작용하기 때문
+ console.log("체킁:",clone);  // 브라우져 개발 툴에서 내용이 이상하게 나올 수 있음!
+ console.log("체킁2",testArr.reverse());
+ */
+ //alert("진영" > "재석");
+ // 객체 비교는 기준이 없으면 의미 없음!
+ let testArr = [
+    {name:"하은",age:20},
+    {name:"경근",age:50},
+    {name:"영하",age:15},
+    {name:"형진",age:13},
+ ];
+ testArr.sort((a,b)=>{
+    //console.log("a=",a,"b=",b);
+    if(a.age > b.age) return 1;
+    return -1;
+    // return b - a;
+
+ })
+ console.log("체킁:",testArr);
+
+</script>

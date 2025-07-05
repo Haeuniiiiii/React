@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>요런 형태 꽤 자주 필요하니, 잘 알아두기</title>
+<style>
+    #friend {
+        display: none; 
+        /* 화면에서 반복해서 쓸 틀을 감춘다 */
+        border: 5px groove gold;
+    }
+</style>    
+
+</head>
+<body>
+    <!-- html 템플릿 패턴에 display사용-->
+    <div id="friend">
+        이름 <input type="text" id="fname" value=""/><br/>
+        나이 <input type="text" id="fage" value=""/><br/>
+        별명 <input type="text" id="falias" value=""/><br/>
+        <button id="del" onclick="delBtn(this)">친구삭제</button>
+    </div>
+
+    <button onclick="frdAdd()">친구추가</button>
+    <div id="frdList"></div>
+    <h1 myTitle>idclass는 머딩0</h1>
+    <h1 myTitle>idclass는 머딩1</h1>
+    <h1 myTitle>idclass는 머딩2 </h1>
+<script>
+    alert(document.querySelectorAll("[myTitle]")[1].innerHTML  );
+
+    const friend = document.querySelector("#friend");
+    const frdList = document.querySelector("#frdList");
+
+    function frdAdd() {
+        let frd = friend.cloneNode(true); //얕은 복사(), 깊은 복사(true)
+        frd.style.display="block"; // none이 아니고 block으로!
+        frdList.appendChild(frd);
+    }
+    
+    function delBtn(pThis) {
+        console.log("체크", pThis);
+        frdList.removeChild(pThis.closest("#friend"));
+    }
+
+</script>
+
+</body>
+</html>

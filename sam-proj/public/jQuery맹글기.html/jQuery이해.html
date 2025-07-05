@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<body>
+    <div class="yujin">유</div>
+    <div class="yujin">진</div>
+    <div class="yujin">세</div>
+    <div class="yujin">에</div>
+    <input type="text" name="wh" value="우"><br>
+    <input type="text" name="wh" value="현"><br>
+    <input type="text" name="wh" value="우"><br>
+    <input type="text" name="wh" value="연"><br>
+</body>
+<script>
+    //  jQuery Core 만들어 보기(이해만 하면 됨) 
+    // callback, 라이브러리(plugin)
+    // 성공이유: 일관된 쉬운 문법(읽기/전부쓰기/부분조작), 브라우져 호환성
+
+    // 즉각 실행함수, 보통 라이브러리에서 사용됨 (초기화, 핵심코드 지키미)
+    //var $;  // 밖에서 보이도록 하기 위해 전역변수 선언
+    (function () {
+        const $=function(pSel) {     // 요렇게 쓰는 걸 factory pattern이라 부름, new 생략 가능
+            return new getDOM(pSel);
+        }
+
+        function getDOM(pSel) {   //  생성자함수(class의 의미)로 사용
+            // 먼저 css 선택자로 선택된 걸 다 가져옴
+            let elems = document.querySelectorAll(pSel);
+            // 옮겨 담기 (왜?, 내 맘대로 가공하기 편하게)
+            this.length = elems.length;
+            for (let i = 0; i < elems.length; i++) {
+                this[i] = elems[i];
+            }
+            return this;
+        }
+
+        //jQuery 사용자들이 본인의 메소드(보통 jQuery Plugin이라 부름)를 자유롭게 추가
+        // getDOM.prototype 객체도 밖으로 빼주어야 함!
+
+        // 전역변수 선언을 window 객체를 이용함
+        window.$ = $;  // 전역변수 $와 지역변수 $를 연결(참조)
+        $.fn=getDOM.prototype;  // 이거 한줄로 jQuery Plugin 개발을 열어줌
+    })()
+
+    // 이벤트 등록
+    $.fn.on = function(pArg1,pArg2){  // 첫번째 이벤트명, 두번째 이벤트핸들러 함수
+        for(let i=0; i< this.length; i++){
+            this[i].addEventListener(pArg1,pArg2.bind(this[i]));
+        }
+        return this; // 메소드 체인닝
+    }
+
+    // val 메소드 만들어 보기 (value 속성을 편하게 다루는 메소드)
+    $.fn.val = function(pArg){    // 오버로딩 없음
+        // 매개 변수가 넘어오지 않았을 때 => 읽기 동작, 선택된 것 중 첫번째를 대상으로
+        if(!pArg){
+            return this[0].value;
+        }
+
+        // 매개변수가 string 일때, 전부 쓰기
+        if(typeof(pArg) == "string"){
+           for(let i=0; i<this.length; i++){
+               this[i].value = pArg;
+           }
+        }
+        // 매개변수 function(콜백) 일때, 부분조작
+        if(typeof(pArg) == "function"){
+           for(let i=0; i<this.length; i++){
+            // this 제어를 위해 call 사용, bind?
+               this[i].value = pArg.call(this[i],i,this[i].value);
+           }
+        }
+        return this; // 메소드 체인닝
+    }
+
+
+    // html 메소드 만들어 보기 (innerHTML 속성을 편하게 다루는 메소드)
+    $.fn.html = function(pArg){    // 오버로딩 없음
+        // 매개 변수가 넘어오지 않았을 때 => 읽기 동작, 선택된 것 중 첫번째를 대상으로
+        if(!pArg){
+            return this[0].innerHTML;
+        }
+
+        // 매개변수가 string 일때, 전부 쓰기
+        if(typeof(pArg) == "string"){
+           for(let i=0; i<this.length; i++){
+               this[i].innerHTML = pArg;
+           }
+        }
+        // 매개변수 function(콜백) 일때, 부분조작
+        if(typeof(pArg) == "function"){
+           for(let i=0; i<this.length; i++){
+               this[i].innerHTML = pArg(i,this[i].innerHTML);
+           }
+        }
+        return this; // 메소드 체인닝
+    }
+
+    //const yujins = new getDOM(".yujin");
+    //const yujins = $("[name=wh]");  // 갑자기 익숙해짐! 이조달라
+    //alert(yujins.val());  // 우
+    //yujins.val("우현 메롱");
+    // this를 사용하고 싶다면 , 화살표 함수 아니공(제어 안됨) --> function 키워드로
+    /*
+    yujins.val(function(idx,val){
+        console.log("this 체킁",this); //?
+        if(idx==1) return "우현 메롱";
+        return val;  // 원래 값 그대로
+    })
+    */
+
+    const yujins = $(".yujin");  // 갑자기 익숙해짐! 이조달라 
+    yujins.on("click",function(){
+        console.log("bind 체킁:",this);
+        this.style.backgroundColor="black";
+        this.style.color="yellow";
+        //alert(this.innerHTML);
+    })  
+
+    // 예제1번
+    // jQuery 사용의 가장 잘못된 방식
+    // 오늘 TV샀는데, 내일 또 사, 내일도 또 사,,
+    $(".yujin").html("메롱");               // 이미 여기에서 객체가 하나 만들어졌는데
+    $(".yujin").html((idx, val) => "안뇽"); // 또 만들어짐, 이게 jQuery의 가장 큰 단점
+    
+    // 위의 경우라면
+    // 메소드체이닝 활용해서 객체생성은 1번만!
+    $(".yujin").html("메롱").html((idx, val) => "안뇽"); 
+    
+    // 예제2번
+    // jQuery 사용의 가장 올바른 방식
+    const $yujin1 = $(".yujin");         // 이미 객체가 만들어졌으니, 이걸 재사용
+    $yujin1.html("욱진");                // 전부쓰기  
+    $yujin1.html((idx, val) => "안뇽");  // jQuery로 만들어진 객체이다! 라고 표현하려고 앞에 $를 붙임
+
+
+    
+
+
+
+
+    //alert(yujins.html());   // 읽기
+    //yujins.html("<h1>욱진 잘자깅</h1>");  // 전부쓰기
+    // 진 과 세만 h1으로 묶어서 크게 하려면? 제한 시간 30초
+    //yujins.html((idx,val)=>  (val == "진" || val == "세")?`<h1>${val}</h1>`:val);
+
+    //console.log("체킁 1:", yujins, yujins.length);
+
+</script>

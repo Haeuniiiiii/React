@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<!-- 나의 라이브러리가 생겼다. 스트립트가 검증되었으니 불러오기만 하자! -->
+<script src="./jsp.js"></script>
+
+<script>
+
+const bdTable = "bdTable"; // 편하게 로컬변수로 스토리지 키값
+const title = request.getParameter("btitle");
+const writer = request.getParameter("bwriter");
+const skills = request.getParameterValues("bskill");
+const cont = request.getParameter("bcont");
+
+// 한 덩어리로 묶기 (VO느낌)
+const bgul = {
+    // 속성명과 변수명이 값을 때는 콜론 생략 가능
+    // title:title,
+    // writer:writer,
+    // skills:skills, 
+    // cont:cont
+    id:1, // 추후 primary key 느낌으로 쓰기 위해 (중복 배제! -> 검색 효율향상)
+    title,
+    writer,
+    skills,
+    cont
+}
+
+let gulTable; // 선언만;
+
+if (!localStorage.getItem(bdTable)) { // 
+    gulTable = []; // 빈배열로 초기화
+    
+} else {
+    gulTable = JSON.parse(localStorage.getItem(bdTable));
+    console.log("체킁", gulTable);
+    // id값을 증가하도록 처리
+    bgul.id = gulTable[gulTable.length-1].id + 1;
+}
+
+gulTable.push(bgul);
+
+// 로컬 스토리지에 저장
+localStorage.setItem(bdTable, JSON.stringify(gulTable));
+
+// 리스트 페이지로 이동
+location.href = "list.html"; // 사용자가 새로고침 눌러야할 수도 있어 쿠키 남아서
+// location.replace("list.html"); // 그래서 relace는 매번 새로달라고 하니 사용자입장에선 빨라보임
+
+
+// 테스트
+// alert(localStorage.getItem(bdTable)); // 키값이 없어서 null(f)을 반환
+
+// let gulTable = []; // 빈 배열 생성, 글 여러개 담아야 하니까
+// gulTable.push(bgul);
+
+// 로컬 스토리지에 저장
+// localStorage.setItem("키값", 값);
+// localStorage.setItem(bdTable, JSON.stringify(gulTable));
+
+// 테스트
+// alert(request.getParameterValues("skill"));
+// alert(request.getParameter("btitle"));
+// alert(request.getParameter("bwriter"));
+// alert(request.getParameter("bcont"));
+
+</script>

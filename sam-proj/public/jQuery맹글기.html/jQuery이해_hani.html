@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <div class="man">맨0</div>
+    <div class="man">맨1</div>
+    <div class="man">맨2</div>
+    <div class="man">맨3</div>
+</body>
+
+<script>
+// 제이쿼리 해보는 이유는 우리가 취업할 현장 유지보수를 위함!
+// jQuery Core 만들어보기 (이해만 하면 된다!)
+// callback, 라이브러리(plugin)
+// 그럼에도 성공한 이유 : 일관된 쉬운 문법(읽기/전부쓰기/부분조작), 브라우저 호환성 문제 해결, DOM 조작의 편리함, AJAX 지원 등
+
+
+// 전역 변수로 $를 선언, jQuery에서 사용하는 $와 충돌 방지
+var $; 
+// 즉시 실행 함수 (IIFE)로 전역 변수 오염 방지, 보통 라이브러리에서 사용됨 (초기화, 핵심코드 지키미)
+(function() { 
+// 이 안에 작성된 코드는 전역 스코프에 영향을 주지 않음
+
+// function merong(pSel) {      // 요렇게 쓰는걸 factory 함수라고 한다. (new 연산자 없이 호출 가능)
+// function $(pSel) {      // 요렇게 쓰는걸 factory 함수라고 한다. (new 연산자 없이 호출 가능)
+
+// @중요) 객체 선언하는 것은 window 객체에 속하는 전역 변수로 선언하는 것과 같다!!!!!      
+const $=function $(pSel) {  
+    return new getDOM(pSel); // merong 함수는 getDOM 생성자 함수를 호출하여 DOM 요소를 가져오는 역할
+}
+
+
+function getDOM(pSel) {                          // 생성자함수(class의 의미)로 사용, DOM을 가져오는 함수
+    // 먼저 css 선택자를 통해 DOM 요소를 가져오는 기능을 구현
+    let elems = document.querySelectorAll(pSel); // 선택자에 해당하는 모든 DOM 요소를 가져옴
+    // 옮겨 담기 (왜? 내 마음대로 가공하기 편하니까!)
+    this.length = elems.length;                  // 가져온 요소의 개수를 length 속성에 저장
+    for(let i = 0; i < elems.length; i++) {      // 가져온 요소들을 순회
+        this[i] = elems[i];                      // this에 현재 요소를 추가 (this는 getDOM 객체를 가리킴)
+    }
+    return this;
+}
+
+// jQuery 사용자들이 본인의 메소드(보통 jQuery plugin이라 부름)를 자유롭게 추가할 수 있었지만
+// 그렇게 하면 속성도 소스도 전역으로 노출되기 때문에
+// getDOM.prototype 객체도 밖으로 빼주면 문제가 해결될 수 있음.
+// getDOM.prototype.메소드명 = function() {
+    // 여기에 메소드 구현
+// };
+
+// 전역 변수로 $를 할당하여 외부에서 지역 변수로 $ 사용할 수 있도록 함 (참조방식으로 연결)
+// 전역변수 선언을 window 객체를 이용함
+window.$ = $;  // 전역변수 $와 지역변수 $를 연결(참조)
+$.fn=getDOM.prototype;  // 한줄로 jQuery plugin 개발을 열어줌
+
+})()
+
+// html 메소드 만들어보기 (오직 innerHtml 속성을 편하게 다루는 메소드)
+$.fn.html = function(pArg) {                    // 자바스크립트 함수에는 오버로딩 없음 
+    if (!pArg) {                                // 매개변수가 넘어오지 않을때, 인자가 없으면 (읽기, 선택된 것 중 첫번째를 대상으로)
+        return this[0].innerHTML;               // 첫번째 요소의 innerHTML 반환
+    } 
+
+    // 매개변수가 string 일때, 전부 쓰기
+    if(typeof(pArg) == "string") {              // 인자가 string이면 (콜백함수로 처리)
+        for (let i = 0; i < this.length; i++) { // 모든 요소에 대해
+            this[i].innerHTML = pArg;           // 콜백 함수 실행 후 innerHTML 설정
+        }
+    }
+    
+    // 매개변수가 function이면 (콜백함수로 처리), 부분 조작
+    if(typeof(pArg) == "function") {            // 인자가 function이면 (콜백함수로 처리)
+        for (let i = 0; i < this.length; i++) { 
+            this[i].innerHTML = pArg(i, this[i].innerHTML); // 콜백 함수 호출
+        }
+    }
+}
+
+// $.fn.insa = function() {
+//     // alert("안뇽~");
+//     console.log("안뇽~");
+// }
+
+// css 선택자
+// const mans = new getDOM("#man");     // getDOM 생성자 함수를 사용하여 #man 선택자에 해당하는 DOM 요소들을 가져옴
+const mans = $(".man");                 // 갑자기 익숙한 언어로!?! (스크립트 특수문자 사용가능한 것 2가지 _ $)
+// mans.insa();  // jQuery plugin 개발을 통해 메소드 추가
+// alert(mans.html());                     // 선택된 요소의 innerHTML을 alert로 출력 (읽기)
+// mans.html("<h1>느끼미가있는제이쿼리</h1>"); // 선택된 요소의 innerHTML을 "안녕!"으로 설정 (쓰기)
+
+
+// 맨1과 맨2만 h3으로 묶어서 작게 하려면?
+// mans.html( (idx, val) => {
+    // if( val == "맨1" || val == "맨2" ) return `<h3>${idx} 히미가히미하게나는화요일 ${val}</h3>`; // h3 태그로 감싸서 반환
+    // return val;
+    // return ( val == "맨1" || val == "맨2" )?  `<h3>${idx} 히미가히미하게나는화요일 ${val}</h3>`:val; // h3 태그로 감싸서 반환
+// }); 
+
+
+// 맨1과 맨2는 h1 태그로 감싸고 나머지는 그대로 반환
+mans.html( (idx,val)=> (val == "맨1" || val == "맨2") ? `<h1>${val}</h1>` : val ); 
+
+console.log("체쿵", mans, mans.length); // 여기서 4개가 선택이 됐겠지
+
+</script>
+

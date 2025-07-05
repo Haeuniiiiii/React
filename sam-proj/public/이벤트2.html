@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    #grand {
+        width:200px;
+        height: 200px;
+        border: 3px solid black;
+    }
+    #mom {
+        position: relative;
+        left:50px;
+        width:100px;
+        height: 100px;
+        border: 3px solid pink;
+    }
+    #me {
+        position: relative;
+        left: 20px;
+        width:50px;
+        height: 50px;
+        border: 3px solid blueviolet;
+    }
+</style>
+</head>
+<body>
+    <!-- built-in 이벤트 -->
+    <a href="//naver.com" onclick="fck(this)">네이벙</a><br>
+    <div id="grand" onclick="fgrand()">할머닝
+        <div id="mom" onclick="fmom()">엄닝
+            <div id="me" onclick="fme()">나</div>
+        </div>
+    </div>
+<script>
+    function fck(pThis){
+        event.preventDefault(); // built-in 이벤트 막기(버리기), 툭하면 쓰이니깡 꼭 기억!
+        alert(`가려는 곳은 ${pThis.innerText}`);
+        location.href=`${pThis.href}`;
+    }
+
+    function fme(){
+        event.stopPropagation(); // 이벤트 전파 막기 => 이전 상황을 이벤트버블링 => 막은 걸 이벤트 캡처링이라 부름
+        alert("나야 나!");
+    }
+    function fmom(){
+        event.stopPropagation();   // 느끼미가 쏴아 할 때, 해결 되는지 이걸 적용해 봄
+        alert("나는야 엄망!");
+    }
+    function fgrand(){
+        alert("나 할미당!");
+    }
+
+</script>
+</body>
+</html>

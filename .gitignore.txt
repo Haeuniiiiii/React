@@ -1,0 +1,63 @@
+# Node.js 관련 파일/폴더 제외 (가장 중요!)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.parcel-cache/
+.eslintcache
+/dist
+/build
+/out
+/tmp
+/temp
+.cache/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.next/ # Next.js 빌드 출력 폴더 (React 프로젝트에서 사용될 수 있음)
+.nuxt/ # Nuxt.js 빌드 출력 폴더 (React 프로젝트에서 사용될 수 있음)
+/coverage # 테스트 커버리지 보고서
+
+# 압축 파일 제외 (이전에 문제 되었던 .zip 파일 포함)
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+*.bz2
+
+# IDE 관련 파일 (이클립스, VSCode, 인텔리제이 사용하신다고 하셨죠!)
+.idea/             # IntelliJ IDEA
+.vscode/           # VS Code
+*.iml              # IntelliJ IDEA 모듈 파일
+.project           # Eclipse 프로젝트 파일
+.classpath         # Eclipse 클래스패스 파일
+.settings/         # Eclipse 설정 폴더
+
+# 운영체제 관련 파일
+.DS_Store          # macOS
+Thumbs.db          # Windows
+Desktop.ini        # Windows
+
+# 로그 파일
+*.log
+logs/
+
+# 빌드 출력 또는 컴파일된 파일 (Java/Spring Boot 프로젝트에서 사용될 수 있음)
+*.class            # Java 컴파일된 파일
+*.o                # C/C++ 오브젝트 파일
+*.pyc              # Python 컴파일된 파일
+target/            # Maven 빌드 출력 폴더 (Java)
+build/             # Gradle, 기타 빌드 출력 폴더
+bin/               # 컴파일된 바이너리 파일 (종종 사용)
+
+# 임시 파일
+*~                 # Vim, Emacs 등 임시 파일
+*.bak              # 백업 파일
+*.tmp              # 임시 파일
+
+# 기타 개발 관련 도구 또는 민감한 정보 (필요시 추가)
+# sts-4.31.0/ # 만약 이 폴더가 프로젝트 안에 있다면 추가 (하지만 보통 프로젝트 밖에 두는 것이 좋음)
+# jdk21/      # 만약 이 폴더가 프로젝트 안에 있다면 추가 (하지만 보통 프로젝트 밖에 두는 것이 좋음)

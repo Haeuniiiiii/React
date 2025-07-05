@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #fileup {
+        width: 300px;
+        height: 300px;
+        border: 1px solid pink;
+    }
+</style>
+</head>
+<body>
+
+    <h1>외부파일끌어다놓깅!</h1>
+    <div>아래에 파일을 놓아죠!</div>
+    <div id="fileup" ondragover="fdrag()" ondrop="fdrop()"></div>
+
+<script>
+    
+    // 브라우저 drag 동작 built-in 막기 ==> preventDefault()
+    function fdrag() {
+        event.stopPropagation(); // 이벤트 버블링 중복될까 노파심에 넣은;;
+        event.preventDefault();
+    }
+
+    // 파일 1개 처리할 때!
+    // function fdrop() {
+    //     event.stopPropagation();
+    //     event.preventDefault();
+    //     // 사용자가 사진을 탁 div안에 놓았을 때 사진이 가득 찼으면 좋겠다!
+    //     let dragFile = event.dataTransfer.files;
+    //     console.log("췤",dragFile);
+    //     let fileReader = new FileReader();              // 파일 읽어주는 아저씨 생성
+    //     fileReader.readAsDataURL(dragFile[0]);         // I/O 작업
+    //     fileReader.onload = function() {                // I/O 완료시 쓰는 함수
+    //         console.log("파일",fileReader.result);           
+    //         let imgTag = document.createElement("img"); // 이미지 태그 생성
+    //         imgTag.src = fileReader.result;             // src에 할당
+    //         imgTag.width = 100;
+    //         imgTag.height = 100;
+    //         // 이미지 태그를 div에 추가, 미리보깅
+    //         document.querySelector("#fileup").appendChild(imgTag);
+    //     }
+    // }
+
+
+
+    // 파일을 여러개 처리할 때!
+    const fileup = document.querySelector("#fileup");
+    function fdrop(){
+        fileup.innerHTML=""; // 내용 클리어!
+        event.stopPropagation(); // 노파심에 넣음
+        event.preventDefault();
+        // 요기에 원하는 처리 추가
+        let dragfiles = event.dataTransfer.files;
+        console.log("체킁:",dragfiles);
+                // 파일 여러개 처리
+        
+        // let 을 이용하면 되긴 하지만 구조가 좋지 않음
+        // (*중요*) 반복문 안에 비동기 코드가 있을 때는 비동기 코드를 별도 함수로 빼면 좋음
+        // 여기선 파일 1개씩 비동기로 처리하는 함수를 만들면 좋으 
+        function oneFile(pFile) {
+            var fileReader = new FileReader(); // 파일 읽어주는 아저씨 생성
+            fileReader.readAsDataURL(pFile); // I/O 작업이라 비동기 처리됨
+            fileReader.onload = function(){
+                console.log("체킁:",fileReader.result);
+                var imgTag = document.createElement("img");  // 이미지 태그 생성
+                imgTag.src = fileReader.result;              // src에 할당
+                imgTag.width = 100;
+                imgTag.height = 100;
+                // 미리보깅
+                fileup.appendChild(imgTag);
+            }
+        }
+
+        for(let i=0; i< dragfiles.length; i++){
+            oneFile(dragfiles[i]);
+        } 
+    }
+
+
+    // 네모박스를 벗어나면 사진이 열린다! 어쩔 수 없이 window도 막아야겠다!
+    window.addEventListener("dragover", fdrag);
+    window.addEventListener("drop", fdrop);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <table border="1" width="400">
+        <thead>
+            <tr>
+                <th>순번</th>
+                <th onclick="nameSort()">이름</th>
+                <th>나이</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="merong">
+                <td>1</td>
+                <td>주영</td>
+                <td>23</td>
+            </tr>
+            <tr class="merong">
+                <td>2</td>
+                <td>미르</td>
+                <td>33</td>
+            </tr>
+            <tr class="merong">
+                <td>3</td>
+                <td>예빈</td>
+                <td>27</td>
+            </tr>
+            <tr class="merong">
+                <td>4</td>
+                <td>철호</td>
+                <td>17</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        // 오늘 말고 내일 쯤에 age에 토글 정렬 만들어 봅니다.
+        //const trs = document.querySelectorAll(".merong"); // tr 4개
+        const tbody = document.querySelector("tbody");
+        // toggle 은 경우의 2개  true/false로 하면 좋겠넹
+        let nameToggle = true;  // 디폴트 값, 
+        function nameSort() {
+            let trs = Array.from(document.querySelectorAll(".merong"));
+            //console.log("체킁: ",trs);
+            // 메모리 상에서 정렬
+            trs.sort((a,b)=>{
+                //console.log("체킁:",a);
+                if(a.children[1].innerHTML > b.children[1].innerHTML ){
+                    return nameToggle?1:-1;
+                }else {
+                    return nameToggle?-1:1;
+                }
+            });
+
+            //정렬 된 걸 화면에 뿌리깅!
+            for(let i=0; i< trs.length; i++){
+                tbody.appendChild(trs[i]);  // 정렬된 순서대로 tbody 뿌리기
+            }
+            nameToggle = !nameToggle; // 값 뒤집어 놓기
+            //tbody.appendChild(document.querySelectorAll(".merong")[0]);
+        }
+    </script>
+</body>
+
+</html>

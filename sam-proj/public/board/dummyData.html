@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+// 더미 데이터 만들기(좋은 더미 데이터는 좋은 품질의 소프트웨어를 만드는데 유용하다!)
+
+const bdTable = "bdTable";
+const gulArray = [];
+
+function ranArr() {
+    let skillArr = ["js","java", "jsp", "oracle"];
+    let ranCnt = Math.round(Math.random()*3); //0~3
+
+    for(let i=0; i<ranCnt; i++) {
+        let ranNum = Math.floor(Math.random()*skillArr.length);
+        skillArr.splice(ranNum, 1);
+    }
+
+    return skillArr;
+}
+
+for(let i = 1; i <= 108; i++) {
+    let gul = { 
+        id:i,
+        title:`타이들더미입니당 ${i}`,
+        writer:`작성자더미 ${i}`,
+        skills: ranArr(),
+        cont: `내용 ${i}`
+    }
+    gulArray.push(gul);
+}
+
+localStorage.setItem(bdTable, JSON.stringify(gulArray));
+location.href = "list.html"; // 리스트로 이동
+
+</script>

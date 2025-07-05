@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<style>
+    #tabbox {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+    }
+
+    .tab {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 1px solid pink;
+        font-size: 4em; /* 4배 */
+        background-color: yellowgreen;
+        color: white;
+    }
+</style>
+</head>
+<body>
+    <h1>못생긴 탭</h1>
+    <button onclick="ftab(this, 0)">탭1</button>
+    <button onclick="ftab(this, 1)">탭2</button>
+    <button onclick="ftab(this, 2)">탭3</button>
+
+    <div id="tabbox">
+        <div class="tab">유</div>
+        <div class="tab">재</div>
+        <div class="tab">석</div>
+    </div>
+<script>
+    const tabs = document.querySelectorAll(".tab");
+    const btns = document.querySelectorAll("button");
+
+    function ftab(pthis, tnum) {
+        // JS잘하는 사람은 모두 console.log()를 달고 산다! 눈에 보여줘야하니까!
+        console.log("체킁", pthis);
+        
+        // 단순히 zIndex 전부 초기화
+        for(let i=0; i < tabs.length; i++) {
+            tabs[i].style.zIndex = 1;
+            btns[i].style.border = "none";
+        }
+        // 원하는 탭에만 큰 z-index 값 부여
+        tabs[tnum].style.zIndex = 999999999;
+        pthis.style.borderBottom = "50px solid red"; /* 속성값 자체가 잘못 되었음 눈의 힘이 필요 */
+    }
+
+</script>
+</body>
+</html>

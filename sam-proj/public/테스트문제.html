@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<div id="disp"></div>
+
+<script>
+
+const testArr = []; // 이미 박스를 만들었는데
+testArr = ["메롱"]; // 새로운 박스를 씌우려고 하면 안됨
+testArr = {"메롱"}; // 중괄호로 값을 변경하는건 가능하지!
+// 그럼 나는 박스 바꾸고 싶어요
+// 그렇다면 let으로 변경하면 됩니다.
+let testArr1 = []; // 새로운 박스를만들어서
+testArr1[0] = ["메롱"]; // 박스 안에 새로운 박스를 만들어서 집어넣는 것은 가능!
+
+
+
+// console.log(disp); // 돔에 id로 접근하여 출력은 되나 이렇게 작성하면 잘림ㅋ
+const disp = document.querySelector("#disp");
+
+const members = [
+    { name: "이하은", age:10, grade:"level1" },
+    { name: "유재석", age:20, grade:"level2" },
+    { name: "노홍철", age:50, grade:"level3" },
+    { name: "박명수", age:40, grade:"level2" },
+    { name: "정형돈", age:30, grade:"level1" }
+]
+
+const levels = {
+    level1:"사장님",
+    level2:"팀장님",
+    level3:"부장님"
+}
+
+// 테이블 만들기 (이건 그냥 눈감고도 할 수 있어야함)
+let tblStr = "<table border=1 width=400>";
+tblStr += "<tr><th>순번</th><th>이름</th><th>나이</th><th>직급</th></tr>";
+
+for(let i = 0; i < members.length; i++) {
+    let member = members[i]; 
+    // 배열 요소가 객체인 경우 요즘은 이런 식으로 미리 빼둠
+    // 백틱(``) 사용이 엄창나게 권장됨. 가독성이 훨씬 더 좋음
+
+    tblStr += `<tr>
+                <td>${i+1}</td>
+                <td>${member.name}</td>
+                <td>${member.age}</td>
+                <td>${levels[member.grade]}</td>
+              </tr>`;
+}
+
+tblStr += "</table>";
+disp.innerHTML = tblStr; //화면에 출력
+// level이 사장님으로 나오게!
+// 힌트 : 배열식 접근법
+
+</script>

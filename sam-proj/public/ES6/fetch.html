@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<!-- axios 설치, 현재 까지는 ajax 툴중 가장 편함! -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<body>
+    <div id="disp"></div>
+</body>
+<script>
+// 기존 Ajax XMLHttpRequest, Promise 
+//   Promise를 리턴하는 조금 더 편한 Api가 필요해짐!   => built-in fetch
+// then을 두번 써야 최종 결과를 가져오기 때문에 약간 욕을 먹고 있음 
+const disp = document.querySelector("#disp");
+/*
+fetch("http://ddit.or.kr",{
+    method:"get"
+}).then((res)=>{    // 매개변수로 url만 쓰면 디폴트 get방식, fetch 두번째 매개변수가 옵션 설정 객체
+    res.text().then((rslt)=>{
+       console.log("최종 결과1:",rslt); // 결과가 바로 화면에 출력되는 게 아니고, 변수에 담겨있음
+       disp.innerHTML = rslt;  // 가져온 결과를 화면에 출력
+    })
+})
+*/
+/*
+axios.get("http://ddit.or.kr").then((res)=>{
+    console.log(res.data);
+    disp.innerHTML = "<h1>액시오스 만만세</h1>";
+    disp.innerHTML += res.data;
+})
+*/
+
+/*
+fetch("data.json").then((res)=>{
+    res.json().then((rslt)=>{
+       console.log("최종 결과2:",rslt);
+    })
+})   
+*/
+// 상황이 폐쇄망일 경우도 있어서 안타깝지만 fetch랑 2개를 다 익숙하게 하는 게 필요
+axios.get("data.json").then((res)=>{
+    console.log(res.data);  // JSON.parse 필요없음 => 알아서 함
+})
+
+</script>

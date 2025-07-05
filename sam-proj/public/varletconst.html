@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+
+<script>
+
+// 구분을 제대로 하고 씁시다! 굉장히 없어 보임..
+// var : 원래의 것, 다른 언어와 호환안됨!
+// let, const : 나중의 것, 다른 언어들과 호환됨!
+// life scope (생명범위)가 다름
+
+function fck() {
+    { //이건 그냥 블록
+        var he = "하은"; // function keyword 안에서 살아
+        let gd = "지디"; // 제일 가까운 {}에서만 살아
+    }
+    alert(he); // OK 하은
+    // alert(gd); // NG 
+}
+fck();
+
+// 문제는 const에 대한 오해가 아주 깊고, 널리 퍼져있음.
+// const myName = "하니";
+// myName = "니하"; // NG
+
+// const로 객체 타입을 선언하면 객체는 못바꾸고
+// 내용물(속성, 메서드)는 바꿀 수 있다!
+const heInfo = {
+    name:"하은",
+    age:20
+}
+
+heInfo.age = 19; // OK
+// 원시타입에서 객체타입 변경가능인데
+console.log("체크", heInfo);
+// 객체타입에서 겉에 싸여진 박스를 바꾸려고 한다? 본드칠 되어있어서 안된다!
+heInfo = {}; // {} => new Object()의 리터럴 표현임
+
+</script>
