@@ -1,3 +1,0 @@
-INDEX VERSION 1.134
-D:\A_TeachingMaterial\05_React\bootWS\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\763564864.index
-\hani\src\main\java

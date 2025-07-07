@@ -103,3 +103,38 @@ tailwindcss "CSS 계의 게임 체인저!"
 ==> 사용하다보면 익숙해진다!
 
 useEffect 를 sideEffect : 비동기 처리 블록을 만들기 위해서
+=> 두번째 매개변수
+=> 없으면 Re-Rendering 될 때 마다 매번 실행된다.
+=> [], 처음 Rendering 될 때만 실행된다.
+=> [merong, jihu] 메롱, 지후란 상태변수가 바뀔 때마다 자동 실행된다.
+
+
+@CrossOrogon("*"), @CrossOrigin({"열어주고 싶은 사이트", "열어주고 싶은 사이트"})
+
+- Origin 구성 3요소 : 프로토콜 + 도메인명(서버명) + 포트
+- http://하은.com:8080 3요소 중 1개라도 다르면
+그 요청은 CrossOrigin 요청이다. (Same-Origin 정책의 제약을 받는다.)
+AJAX 요청일 때만! (왜? 변수에 받기 때문에 조작이 가능하다)
+- 뉘앙스를 느끼기 시작해야한다!
+- DOMContentLoaded 이벤트나 강제 리렌더링, 상태변수가 바뀌었을 때
+- Update(이것도 Re-Rendering 필요)
+
+```
+function 소희() {
+	비동기 코드
+}
+소희()
+```
+
+==> useState ~ useReducer 	~ useContext
+==> useEffect 
+==> useRef 잘 쓰면 편하다!
+==> props Driling (단방향 전달)
+chidren(props에 포함된당
+<하은> 요기에 쓰는게 chidren </하은>
+<하은/>
+
+context는 이해
+context.Provider 를 보통 분리해서 사용(분리패턴)
+context, 상태관리 (reducer 도 별도 파일로!
+어떤 context가 어떤 내용을 담고 있는지와 그 처리를 같은 파일에 담기 위함

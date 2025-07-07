@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "id": "0",
+      "text": "재석이가 할일",
+      "done": true
+    },
+    {
+      "id": "1",
+      "text": "동훈이가 할일",
+      "done": false
+    },
+    {
+      "id": "2",
+      "text": "형돈이가 할일",
+      "done": false
+    },
+    {
+      "id": "4",
+      "text": "명수가 할일",
+      "done": true
+    },
+    {
+      "id": "3",
+      "text": "준하가 할일",
+      "done": false
+    }
+  ]
+}
