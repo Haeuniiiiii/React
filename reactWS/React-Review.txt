@@ -138,3 +138,12 @@ context는 이해
 context.Provider 를 보통 분리해서 사용(분리패턴)
 context, 상태관리 (reducer 도 별도 파일로!
 어떤 context가 어떤 내용을 담고 있는지와 그 처리를 같은 파일에 담기 위함
+
+lucide icon
+context API => 중앙 상태 관리 (Not Props Drilling )
+		 => 상태변수/상태변수 함수,context 가지고 어디서든 필요할 때 useContext
+
+const  하은컨텍스트 = createContext()
+하은컨텍스트.Provider value 속성에 하은 컨텍스트에 담을 내용 지정
+			       value에 담는건 상태변수, reducer
+
